@@ -33,7 +33,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "JavaScriptEngineSwitcher.ChakraCore/3.1.10": {
+      "JavaScriptEngineSwitcher.ChakraCore/3.2.1": {
         "type": "package",
         "dependencies": {
           "AdvancedStringBuilder": "0.1.0",
@@ -93,11 +93,11 @@
           "lib/netstandard2.0/JavaScriptEngineSwitcher.Extensions.MsDependencyInjection.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.Msie/3.1.10": {
+      "JavaScriptEngineSwitcher.Msie/3.2.1": {
         "type": "package",
         "dependencies": {
           "JavaScriptEngineSwitcher.Core": "3.1.0",
-          "MsieJavaScriptEngine": "3.0.4"
+          "MsieJavaScriptEngine": "3.0.5"
         },
         "compile": {
           "lib/netstandard2.0/JavaScriptEngineSwitcher.Msie.dll": {}
@@ -262,7 +262,7 @@
           }
         }
       },
-      "MsieJavaScriptEngine/3.0.4": {
+      "MsieJavaScriptEngine/3.0.5": {
         "type": "package",
         "dependencies": {
           "AdvancedStringBuilder": "0.1.0"
@@ -1002,17 +1002,17 @@
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
       ]
     },
-    "JavaScriptEngineSwitcher.ChakraCore/3.1.10": {
-      "sha512": "LtP30946YknsYW6LFVljWJ7iJ08E6x0Br/tQFkCl6MCtuCjGKmIsyFp1+ofo9qsSpbhSs8ueowcD7GK+CbyJUw==",
+    "JavaScriptEngineSwitcher.ChakraCore/3.2.1": {
+      "sha512": "AswYx7ShLlBmMyfULwvxMSp2cq0qdCoEQHJ5t+Q4ZtEpmgX1JF9nDSE5a+jEDPJRtz8LMXvz0/rZGBtY1a/d4A==",
       "type": "package",
-      "path": "javascriptengineswitcher.chakracore/3.1.10",
+      "path": "javascriptengineswitcher.chakracore/3.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
         "advanced-string-builder-license.txt",
         "chakra-samples-license.txt",
-        "javascriptengineswitcher.chakracore.3.1.10.nupkg.sha512",
+        "javascriptengineswitcher.chakracore.3.2.1.nupkg.sha512",
         "javascriptengineswitcher.chakracore.nuspec",
         "jsrt-dotnet-license.txt",
         "lib/net40-client/JavaScriptEngineSwitcher.ChakraCore.dll",
@@ -1101,15 +1101,15 @@
         "readme.txt"
       ]
     },
-    "JavaScriptEngineSwitcher.Msie/3.1.10": {
-      "sha512": "Q4W01wcV7JUZU6JZ4m42Bdgy7l6JfryGbgBrKqTg39lDN/3aGqgbCJEWyfr6S1wuLKKiIGUJhEdvLUMYxtUP/A==",
+    "JavaScriptEngineSwitcher.Msie/3.2.1": {
+      "sha512": "Bwi9OB8G8wBIfyIND9inuCaJi0Fvbk88/g1VJ7g3w7hVsGUkVcLSRMgGKErAlUJbKd4Iz5plkkLO5t8YXeQTqQ==",
       "type": "package",
-      "path": "javascriptengineswitcher.msie/3.1.10",
+      "path": "javascriptengineswitcher.msie/3.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
-        "javascriptengineswitcher.msie.3.1.10.nupkg.sha512",
+        "javascriptengineswitcher.msie.3.2.1.nupkg.sha512",
         "javascriptengineswitcher.msie.nuspec",
         "lib/net40-client/JavaScriptEngineSwitcher.Msie.dll",
         "lib/net40-client/JavaScriptEngineSwitcher.Msie.xml",
@@ -1411,10 +1411,10 @@
         "version.txt"
       ]
     },
-    "MsieJavaScriptEngine/3.0.4": {
-      "sha512": "LG8HpPxuAj3cKMVtY+J5SJvRSxqBb7mtyJtkwiBk4Uc9bs0LPKQubZBLFDkdboPN8NlU8TdD5kMLPoxQunGspw==",
+    "MsieJavaScriptEngine/3.0.5": {
+      "sha512": "dmX0b5iZ3QLChZDbJ/nnDc1/wpOqUmyyKo6RVTB2xSsyKZ9G8BwwPXWm62wxNda389iKs0q5uUzFkJSvHshf7A==",
       "type": "package",
-      "path": "msiejavascriptengine/3.0.4",
+      "path": "msiejavascriptengine/3.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1436,7 +1436,7 @@
         "lib/netstandard2.0/MsieJavaScriptEngine.dll",
         "lib/netstandard2.0/MsieJavaScriptEngine.xml",
         "lib/netstandard2.0/ru-ru/MsieJavaScriptEngine.resources.dll",
-        "msiejavascriptengine.3.0.4.nupkg.sha512",
+        "msiejavascriptengine.3.0.5.nupkg.sha512",
         "msiejavascriptengine.nuspec",
         "readme.txt",
         "sass-and-coffee-license.txt"
@@ -3692,11 +3692,11 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
       "EntityFramework >= 6.3.0",
-      "JavaScriptEngineSwitcher.ChakraCore >= 3.1.10",
+      "JavaScriptEngineSwitcher.ChakraCore >= 3.2.1",
       "JavaScriptEngineSwitcher.ChakraCore.Native.win-x64 >= 3.1.10",
       "JavaScriptEngineSwitcher.Core >= 3.1.0",
       "JavaScriptEngineSwitcher.Extensions.MsDependencyInjection >= 3.1.0",
-      "JavaScriptEngineSwitcher.Msie >= 3.1.10",
+      "JavaScriptEngineSwitcher.Msie >= 3.2.1",
       "JavaScriptEngineSwitcher.V8.Native.win-x64 >= 3.1.5",
       "Newtonsoft.Json >= 12.0.2",
       "React.AspNet >= 5.1.1",
@@ -3704,21 +3704,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cbrow\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\cbrow\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
+      "projectUniqueName": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
       "projectName": "SMCM_Fall_2019_Full_Stack_Project",
-      "projectPath": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
+      "projectPath": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
       "packagesPath": "C:\\Users\\cbrow\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\obj\\",
+      "outputPath": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\cbrow\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -3750,7 +3746,7 @@
           },
           "JavaScriptEngineSwitcher.ChakraCore": {
             "target": "Package",
-            "version": "[3.1.10, )"
+            "version": "[3.2.1, )"
           },
           "JavaScriptEngineSwitcher.ChakraCore.Native.win-x64": {
             "target": "Package",
@@ -3766,7 +3762,7 @@
           },
           "JavaScriptEngineSwitcher.Msie": {
             "target": "Package",
-            "version": "[3.1.10, )"
+            "version": "[3.2.1, )"
           },
           "JavaScriptEngineSwitcher.V8.Native.win-x64": {
             "target": "Package",

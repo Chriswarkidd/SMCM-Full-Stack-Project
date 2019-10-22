@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj": {}
+    "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj": {
+    "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
+        "projectUniqueName": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
         "projectName": "SMCM_Fall_2019_Full_Stack_Project",
-        "projectPath": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
+        "projectPath": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\SMCM_Fall_2019_Full_Stack_Project.csproj",
         "packagesPath": "C:\\Users\\cbrow\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cbrow\\source\\repos\\SMCM_Fall_2019_Full_Stack_Project\\obj\\",
+        "outputPath": "C:\\Users\\cbrow\\Documents\\GitHub\\SMCM-Full-Stack-Project\\SMCM_Fall_2019_Full_Stack_Project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\cbrow\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -47,7 +44,7 @@
             },
             "JavaScriptEngineSwitcher.ChakraCore": {
               "target": "Package",
-              "version": "[3.1.10, )"
+              "version": "[3.2.1, )"
             },
             "JavaScriptEngineSwitcher.ChakraCore.Native.win-x64": {
               "target": "Package",
@@ -63,7 +60,7 @@
             },
             "JavaScriptEngineSwitcher.Msie": {
               "target": "Package",
-              "version": "[3.1.10, )"
+              "version": "[3.2.1, )"
             },
             "JavaScriptEngineSwitcher.V8.Native.win-x64": {
               "target": "Package",

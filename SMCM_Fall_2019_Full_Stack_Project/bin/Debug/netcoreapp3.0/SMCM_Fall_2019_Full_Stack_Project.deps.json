@@ -25,11 +25,11 @@
       "SMCM_Fall_2019_Full_Stack_Project/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.3.0",
-          "JavaScriptEngineSwitcher.ChakraCore": "3.1.10",
+          "JavaScriptEngineSwitcher.ChakraCore": "3.2.1",
           "JavaScriptEngineSwitcher.ChakraCore.Native.win-x64": "3.1.10",
           "JavaScriptEngineSwitcher.Core": "3.1.0",
           "JavaScriptEngineSwitcher.Extensions.MsDependencyInjection": "3.1.0",
-          "JavaScriptEngineSwitcher.Msie": "3.1.10",
+          "JavaScriptEngineSwitcher.Msie": "3.2.1",
           "JavaScriptEngineSwitcher.V8.Native.win-x64": "3.1.5",
           "Newtonsoft.Json": "12.0.2",
           "React.AspNet": "5.1.1",
@@ -358,15 +358,15 @@
           "lib/netstandard2.1/EntityFramework.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.ChakraCore/3.1.10": {
+      "JavaScriptEngineSwitcher.ChakraCore/3.2.1": {
         "dependencies": {
           "AdvancedStringBuilder": "0.1.0",
           "JavaScriptEngineSwitcher.Core": "3.1.0"
         },
         "runtime": {
           "lib/netcoreapp2.1/JavaScriptEngineSwitcher.ChakraCore.dll": {
-            "assemblyVersion": "3.1.10.0",
-            "fileVersion": "3.1.10.0"
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
           }
         },
         "resources": {
@@ -421,15 +421,15 @@
           "lib/netstandard2.0/JavaScriptEngineSwitcher.Extensions.MsDependencyInjection.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.Msie/3.1.10": {
+      "JavaScriptEngineSwitcher.Msie/3.2.1": {
         "dependencies": {
           "JavaScriptEngineSwitcher.Core": "3.1.0",
-          "MsieJavaScriptEngine": "3.0.4"
+          "MsieJavaScriptEngine": "3.0.5"
         },
         "runtime": {
           "lib/netstandard2.0/JavaScriptEngineSwitcher.Msie.dll": {
-            "assemblyVersion": "3.1.10.0",
-            "fileVersion": "3.1.10.0"
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
           }
         },
         "resources": {
@@ -535,14 +535,14 @@
           "Microsoft.NETCore.Platforms": "3.0.0"
         }
       },
-      "MsieJavaScriptEngine/3.0.4": {
+      "MsieJavaScriptEngine/3.0.5": {
         "dependencies": {
           "AdvancedStringBuilder": "0.1.0"
         },
         "runtime": {
           "lib/netstandard2.0/MsieJavaScriptEngine.dll": {
-            "assemblyVersion": "3.0.4.0",
-            "fileVersion": "3.0.4.0"
+            "assemblyVersion": "3.0.5.0",
+            "fileVersion": "3.0.5.0"
           }
         },
         "resources": {
@@ -2700,12 +2700,12 @@
       "path": "entityframework/6.3.0",
       "hashPath": "entityframework.6.3.0.nupkg.sha512"
     },
-    "JavaScriptEngineSwitcher.ChakraCore/3.1.10": {
+    "JavaScriptEngineSwitcher.ChakraCore/3.2.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LtP30946YknsYW6LFVljWJ7iJ08E6x0Br/tQFkCl6MCtuCjGKmIsyFp1+ofo9qsSpbhSs8ueowcD7GK+CbyJUw==",
-      "path": "javascriptengineswitcher.chakracore/3.1.10",
-      "hashPath": "javascriptengineswitcher.chakracore.3.1.10.nupkg.sha512"
+      "sha512": "sha512-AswYx7ShLlBmMyfULwvxMSp2cq0qdCoEQHJ5t+Q4ZtEpmgX1JF9nDSE5a+jEDPJRtz8LMXvz0/rZGBtY1a/d4A==",
+      "path": "javascriptengineswitcher.chakracore/3.2.1",
+      "hashPath": "javascriptengineswitcher.chakracore.3.2.1.nupkg.sha512"
     },
     "JavaScriptEngineSwitcher.ChakraCore.Native.win-x64/3.1.10": {
       "type": "package",
@@ -2728,12 +2728,12 @@
       "path": "javascriptengineswitcher.extensions.msdependencyinjection/3.1.0",
       "hashPath": "javascriptengineswitcher.extensions.msdependencyinjection.3.1.0.nupkg.sha512"
     },
-    "JavaScriptEngineSwitcher.Msie/3.1.10": {
+    "JavaScriptEngineSwitcher.Msie/3.2.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Q4W01wcV7JUZU6JZ4m42Bdgy7l6JfryGbgBrKqTg39lDN/3aGqgbCJEWyfr6S1wuLKKiIGUJhEdvLUMYxtUP/A==",
-      "path": "javascriptengineswitcher.msie/3.1.10",
-      "hashPath": "javascriptengineswitcher.msie.3.1.10.nupkg.sha512"
+      "sha512": "sha512-Bwi9OB8G8wBIfyIND9inuCaJi0Fvbk88/g1VJ7g3w7hVsGUkVcLSRMgGKErAlUJbKd4Iz5plkkLO5t8YXeQTqQ==",
+      "path": "javascriptengineswitcher.msie/3.2.1",
+      "hashPath": "javascriptengineswitcher.msie.3.2.1.nupkg.sha512"
     },
     "JavaScriptEngineSwitcher.V8.Native.win-x64/3.1.5": {
       "type": "package",
@@ -2812,12 +2812,12 @@
       "path": "microsoft.win32.systemevents/4.6.0",
       "hashPath": "microsoft.win32.systemevents.4.6.0.nupkg.sha512"
     },
-    "MsieJavaScriptEngine/3.0.4": {
+    "MsieJavaScriptEngine/3.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LG8HpPxuAj3cKMVtY+J5SJvRSxqBb7mtyJtkwiBk4Uc9bs0LPKQubZBLFDkdboPN8NlU8TdD5kMLPoxQunGspw==",
-      "path": "msiejavascriptengine/3.0.4",
-      "hashPath": "msiejavascriptengine.3.0.4.nupkg.sha512"
+      "sha512": "sha512-dmX0b5iZ3QLChZDbJ/nnDc1/wpOqUmyyKo6RVTB2xSsyKZ9G8BwwPXWm62wxNda389iKs0q5uUzFkJSvHshf7A==",
+      "path": "msiejavascriptengine/3.0.5",
+      "hashPath": "msiejavascriptengine.3.0.5.nupkg.sha512"
     },
     "Newtonsoft.Json/12.0.2": {
       "type": "package",
