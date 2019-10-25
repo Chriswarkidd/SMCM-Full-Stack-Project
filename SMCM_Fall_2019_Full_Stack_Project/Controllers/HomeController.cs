@@ -27,6 +27,12 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             {test = x
             });
         }
+
+        public IActionResult Test2()
+        {
+            String game = "Divinity 2: Original Sin";
+            return Json(new { test = game });
+        }
         public IActionResult Index()
         {
             return View();
