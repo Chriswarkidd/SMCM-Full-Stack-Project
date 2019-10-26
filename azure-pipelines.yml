@@ -1,4 +1,11 @@
 # ASP.NET Core (.NET Framework)
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Free Trial(5bf2d310-06d0-4e7a-a23e-21d345cf4322)'
+    appType: 'webApp'
+    appName: 'GameRecommender'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
