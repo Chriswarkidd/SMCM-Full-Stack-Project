@@ -18,11 +18,33 @@ a {
   border-color: #1861ac;
 }
 
+.btn-login {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    width: 100px;
+    position: relative;
+    left: 6.5%;
+    top: 10px;
+    border-radius: 20px;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.navbar-color{
+    font: bold 18px Arial;
+    color: white;
+    background-color: #242424;
+}
+
+.navbar-text{
+    color: rgba(255, 255, 255, 0.5);
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -33,6 +55,19 @@ html {
   html {
     font-size: 16px;
   }
+}
+
+.login-input {
+    border-spacing: 25px;
+    border-radius: 5px;
+}
+
+.div-login {
+    padding-top: 5%;
+    padding-left: 40%;
+    padding-bottom: 5%;
+    background-color: lightgray;
+    border-style: solid;
 }
 
 .border-top {
