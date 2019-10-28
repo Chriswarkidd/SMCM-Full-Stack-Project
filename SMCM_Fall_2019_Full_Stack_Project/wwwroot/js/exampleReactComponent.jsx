@@ -35,7 +35,7 @@
                                 <option value="Sports">Sports</option>
                             </select>
                         </div>
-                            <div style={{ paddingRight: "75px", paddingLeft: "75px" }}>
+                            <div style={{ paddingRight: "70px", paddingLeft: "70px" }}>
                             <h2 className={"select-homepage"}>ESRB Rating:</h2>
                                 <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
                                     <option value="Any">Any Rating</option>
@@ -55,7 +55,7 @@
                                 <option value="Switch">Switch</option>
                             </select>
                             </div>
-                        <h3>{this.state.text}</h3>
+                            <h3 style={{ paddingTop: "20px" }}>{this.state.text}</h3>
                         <button className={"btn-block"} onClick={() => this.ajaxTest(this)}> Press me </button>
                         </div>
                     </div>
