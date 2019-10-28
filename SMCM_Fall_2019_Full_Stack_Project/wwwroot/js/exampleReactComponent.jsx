@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div>
-                            <h1 className={"select-homepage"}>Genre:</h1>
+                                <h1 className={"select-homepage"}>Genre:</h1>
                                 <select className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
                                 <option value="Any">Any Genre</option>
                                 <option value="Action">Action</option>
@@ -37,7 +37,7 @@
                         </div>
                             <div>
                             <h2 className={"select-homepage"}>ESRB Rating:</h2>
-                            <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
+                                <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
                                     <option value="Any">Any Rating</option>
                                     <option value="E">Everyone</option>
                                     <option value="E10">Everyone 10+</option>
@@ -46,8 +46,8 @@
                             </select>
                         </div>
                             <div>
-                        <h3 className={"select-homepage"}>Platform:</h3>
-                            <select className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
+                                <h3 className={"select-homepage"}>Platform:</h3>
+                                <select className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
                                 <option value="Any">Any Platform</option>
                                 <option value="PC">PC</option>
                                 <option value="Xbox">Xbox</option>
