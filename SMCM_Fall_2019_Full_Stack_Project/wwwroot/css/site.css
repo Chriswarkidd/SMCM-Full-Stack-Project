@@ -29,6 +29,14 @@ a {
     border-radius: 20px;
 }
 
+.btn-delete {
+    color: #fff;
+    background-color: #b60707;
+    border-color: #5c0404;
+    width: 200px;
+    border-radius: 20px;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
