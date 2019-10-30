@@ -125,3 +125,10 @@ body {
 .select-homepage {
     font-size: 14px;
 }
+
+.table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+}

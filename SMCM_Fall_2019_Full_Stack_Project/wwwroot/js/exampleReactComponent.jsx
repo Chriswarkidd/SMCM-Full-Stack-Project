@@ -40,7 +40,7 @@
                                 <option value="Sports">Sports</option>
                             </select>
                         </div>
-                            <div style={{ paddingRight: "70px", paddingLeft: "70px" }}>
+                            <div style={{ paddingRight: "50px", paddingLeft: "50px" }}>
                             <h2 className={"select-homepage"}>ESRB Rating:</h2>
                                 <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
                                     <option value="Any">Any Rating</option>
@@ -61,7 +61,12 @@
                             </select>
                             </div>
                             <h3 style={{ paddingTop: "20px" }}>{this.state.text}</h3>
-                            {this.state.recommended ? (<div> <button className={"btn-accept"}> Sounds Great </button> <button className={"btn-accept"} > Roll Again </button></div>) : (<button className={"btn-block"} onClick={() => this.ajaxTest(this)}> Press me </button>)}
+                            {this.state.recommended ?
+                                (<div>
+                                    <button className={"btn-accept"}> Sounds Great </button>
+                                    <button className={"btn-accept"} > Roll Again </button>
+                                </div>) :
+                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
                         </div>
                     </div>
                     <div class="col-md-3"></div>
