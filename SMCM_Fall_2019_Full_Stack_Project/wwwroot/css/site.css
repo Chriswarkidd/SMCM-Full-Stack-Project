@@ -36,6 +36,16 @@ a {
     border-radius: 20px;
 }
 
+.btn-accept {
+    color: #000000;
+    background-color: #e4dede;
+    border-color: #a39c9c;
+    width: 150px;
+    position: relative;
+    top: 10px;
+    border-radius: 20px;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
