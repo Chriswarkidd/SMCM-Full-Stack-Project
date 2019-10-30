@@ -3,7 +3,9 @@
     constructor(props) {
         super(props);
         this.state = {
-        text: "What Game Should I Play?"};
+            text: "What Game Should I Play?",
+            recommended : false,
+        };
     }
 
 
@@ -12,7 +14,10 @@
     ajaxTest = (obj) => {
         $.ajax({ url: "/Home/Test2", data: {x: 2} }).done(
             function (result) {
-                obj.setState({ text: result.test }); 
+                obj.setState({
+                    text: result.test,
+                    recommended : true
+                }); 
             });
     };
 
@@ -56,7 +61,7 @@
                             </select>
                             </div>
                             <h3 style={{ paddingTop: "20px" }}>{this.state.text}</h3>
-                        <button className={"btn-block"} onClick={() => this.ajaxTest(this)}> Press me </button>
+                            {this.state.recommended ? (<div> <button className={"btn-accept"}> Sounds Great </button> <button className={"btn-accept"} > Roll Again </button></div>) : (<button className={"btn-block"} onClick={() => this.ajaxTest(this)}> Press me </button>)}
                         </div>
                     </div>
                     <div class="col-md-3"></div>
