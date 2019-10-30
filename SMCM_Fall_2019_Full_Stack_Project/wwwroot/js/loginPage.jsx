@@ -29,6 +29,7 @@
                 <input id={"password"} className={"login-input"} type={"password"} />
                 <div />
                 <button className={"btn-login"}> Sign in </button>
+                <button className={"btn-login"} style={{left: "1.25%"}}> Sign up </button>
             </div>
         );
     }
