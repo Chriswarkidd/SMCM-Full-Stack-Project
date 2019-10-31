@@ -43,11 +43,15 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             return View();
         }
 
-        public IActionResult Account()
+        public IActionResult AllGames()
         {
             return View();
         }
 
+        public IActionResult Account()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
