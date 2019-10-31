@@ -17,7 +17,7 @@ class Table extends React.Component {
         this.state = {
 
         };
-        this.games = [{ title: "Astroneer", played: true }, { title: "Destiny 2", played: true }, { title: "Divinity 2", played: false }, {title:"Zuma's Revenge", played: true }];
+        this.games = [{ title: "Ark: Survival Evolved", played: true }, { title: "Astroneer", played: true }, { title: "Destiny 2", played: true }, { title: "Divinity 2", played: false }, { title: "Fable", played: false }, { title: "Zuma's Revenge", played: true }];
     }
     render() {
         return (
