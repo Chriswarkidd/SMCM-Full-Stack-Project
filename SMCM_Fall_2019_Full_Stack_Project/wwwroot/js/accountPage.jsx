@@ -17,27 +17,36 @@ class Table extends React.Component {
         this.state = {
 
         };
-        this.games = [{ title: "Ark: Survival Evolved", played: true }, { title: "Astroneer", played: true }, { title: "Destiny 2", played: true }, { title: "Divinity 2", played: false }, { title: "Fable", played: false }, { title: "Zuma's Revenge", played: true }];
+        this.games = [{ title: "Ark: Survival Evolved", played: true },
+            { title: "Astroneer", played: true },
+            { title: "Destiny 2", played: true },
+            { title: "Divinity 2", played: false },
+            { title: "Fable", played: false },
+            { title: "Zuma's Revenge", played: true }];
     }
     render() {
         return (
             <table className={"table"}>
-                <tr>
-                    <th>
-                        Game Title
+                <thead>
+                    <tr>
+                        <th>
+                            Game Title
                     </th>
-                    <th>
-                        Played
+                        <th>
+                            Played
                     </th>
-                </tr>
-                {this.games.map((g, index) => (<tr>
-                    <td>
-                        {g.title}
-                    </td>
-                    <td>
-                        {g.played ? "Yes":"No"}
-                    </td>
-                </tr>))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.games.map((g, index) => (<tr key={index}>
+                        <td>
+                            {g.title}
+                        </td>
+                        <td>
+                            {g.played ? "Yes" : "No"}
+                        </td>
+                    </tr>))}
+                </tbody>
             </table>
         );
     }
