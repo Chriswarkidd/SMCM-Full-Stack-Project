@@ -11,7 +11,7 @@
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
-    ajaxTest = (obj) => {
+    ajaxTest(obj){
         $.ajax({ url: "/Home/Test2", data: {x: 2} }).done(
             function (result) {
                 obj.setState({
@@ -19,16 +19,15 @@
                     recommended : true
                 }); 
             });
-    };
+    }
 
     render() {
         return (
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
+            <div className={"container-fluid"}>
+                <div className={"row"}>
+                    <div className={"col-md-3"}/>
+                    <div className={"col-md-6"}>
+                        <div className={"row"}>
                             <div style={{ paddingRight: "50px" }}>
                                 <h1 className={"select-homepage"}>Genre:</h1>
                                 <select className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
@@ -69,7 +68,7 @@
                                 (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
+                    <div className={"col-md-3"}/>
                 </div>
             </div>
 
