@@ -43,7 +43,7 @@ class Table extends React.Component {
                             {g.title}
                         </td>
                         <td>
-                            {g.played ? "Yes" : "No"}
+                            <input type="checkbox" defaultChecked={g.played}/>
                         </td>
                     </tr>))}
                 </tbody>
