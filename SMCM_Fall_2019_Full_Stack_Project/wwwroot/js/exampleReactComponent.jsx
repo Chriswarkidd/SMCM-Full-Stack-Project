@@ -12,7 +12,7 @@
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
     ajaxTest(obj){
-        $.ajax({ url: "/Home/Test2", data: {x: 2} }).done(
+        $.ajax({ url: "/Home/Test"}).done(
             function (result) {
                 obj.setState({
                     text: result.test,

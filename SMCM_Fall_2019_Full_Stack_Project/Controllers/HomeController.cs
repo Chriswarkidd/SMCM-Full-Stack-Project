@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SMCM_Fall_2019_Full_Stack_Project.Models;
 
@@ -20,12 +23,44 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
 
         [HttpGet]
-        public IActionResult Test(int x = 3)
+        public IActionResult Test()
         {
-            x *= 3;
-            return Json(new 
-            {test = x
-            });
+            string a = "";
+
+            using (var db = new WgsipContext())
+            {
+                a = db.PlayedGames.Include(g => g.User).Where(g => g.User.AccountId == 1).ToList().First().GameName;
+            }
+
+                return Json(new
+                { test = a
+                });
+        }
+
+
+        [HttpGet]
+        public IActionResult TestGameList()
+        {
+
+            using (var db = new WgsipContext())
+            {
+                try
+                {
+                    var a = db.PlayedGames.Include(g => g.User).Where(g => g.User.AccountId == 1).ToList();
+                    return Json(new
+                    {
+                        test = a
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    return Json(new
+                    {
+                        test = e.Message
+                    });
+                }
+            }
         }
 
         public IActionResult Test2()
