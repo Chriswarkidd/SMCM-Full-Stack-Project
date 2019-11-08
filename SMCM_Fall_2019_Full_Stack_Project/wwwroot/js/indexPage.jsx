@@ -12,7 +12,7 @@
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
     ajaxTest(obj){
-        $.ajax({ url: "/Home/Test2", data: {x: 2} }).done(
+        $.ajax({ url: "/Home/Test"}).done(
             function (result) {
                 obj.setState({
                     text: result.test,
@@ -59,11 +59,11 @@
                                 <option value="Switch">Switch</option>
                             </select>
                             </div>
-                            <h3 style={{ paddingTop: "20px" }}>{this.state.text}</h3>
+                            <h3 style={this.state.recommended ? { paddingLeft: "40%", font: 'bold 30 Arial' } : {}}>{this.state.text}</h3>
                             {this.state.recommended ?
                                 (<div>
                                     <button className={"btn-accept"}> Sounds Great </button>
-                                    <button className={"btn-accept"} > Roll Again </button>
+                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
                                 </div>) :
                                 (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
                         </div>

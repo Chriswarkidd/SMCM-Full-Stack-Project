@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
+using SMCM_Fall_2019_Full_Stack_Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SMCM_Fall_2019_Full_Stack_Project
 {
@@ -34,6 +36,17 @@ namespace SMCM_Fall_2019_Full_Stack_Project
                 .AddChakraCore();
 
             services.AddControllersWithViews();
+
+
+            //Use this when working with a local database
+
+            //    services.AddDbContext<WgsipContext>(options =>
+            //            options.UseSqlServer(Configuration.GetConnectionString("con")));
+
+            //use this when publishing the application
+                services.AddDbContext<WgsipContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
