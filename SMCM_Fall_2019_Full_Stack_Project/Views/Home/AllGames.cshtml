@@ -7,66 +7,11 @@
     <title>View All Games</title>
 </head>
 <body>
-    <h1 class="text-center">All Games</h1>
-        <br />
-    <input class="form-control" id="gameSearch" type="text" placeholder="Search Games..."/>
-        <br />
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Publishing Studio</th>
-                    <th>Date</th>
-                    <th>Genre</th>
-                    <th>ESRB Rating</th>
-                    <th>Platforms</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>GTA V</td>
-                    <td>Rockstar Games</td>
-                    <td>2013</td>
-                    <td>Adventure</td>
-                    <td>M</td>
-                    <td>Playstation, XBox, PC</td>
-                </tr>
-                <tr>
-                    <td>OverWatch</td>
-                    <td>Blizzard Entertainment</td>
-                    <td>2016</td>
-                    <td>First Person Shooter</td>
-                    <td>T</td>
-                    <td>Playstation, Xbox, PC, Switch</td>
-                </tr>
-                <tr>
-                    <td>Madden NFL 19</td>
-                    <td>EA Sports</td>
-                    <td>2019</td>
-                    <td>Sports</td>
-                    <td>E</td>
-                    <td>Playstation, Xbox, PC</td>
-                </tr>
-                <tr>
-                    <td>Minecraft</td>
-                    <td>Mojang</td>
-                    <td>2011</td>
-                    <td>Adventure</td>
-                    <td>E10+</td>
-                    <td>Playstation, Xbox, PC, Switch</td>
-                </tr>
-                <tr>
-                    <td>Spore</td>
-                    <td>Electronic Arts</td>
-                    <td>2008</td>
-                    <td>Simulation</td>
-                    <td>E10+</td>
-                    <td>PC</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <div id="content" />
 </body>
 </html>
 
+
+@section Scripts {
+    <script src="~/js/dist/viewAll-bundle.js"></script>
+}

@@ -2,9 +2,10 @@
 module.exports = {
     mode: 'development',
     entry: {
-        index: './wwwroot/js/exampleReactComponent.jsx',
+        index: './wwwroot/js/indexPage.jsx',
         login: './wwwroot/js/loginPage.jsx',
-        account: './wwwroot/js/accountPage.jsx'},
+        account: './wwwroot/js/accountPage.jsx',
+        viewAll: './wwwroot/js/viewAllPage.jsx'},
     output: {
         path: path.resolve(__dirname, './wwwroot/js/dist'),
         filename: '[name]-bundle.js',

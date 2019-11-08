@@ -29,12 +29,39 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
             using (var db = new WgsipContext())
             {
-                a = db.PlayedGames.Include(g => g.User).Where(g => g.User.AccountId == 1).ToList().First().GameName;
+                var gameList = db.PlayedGames.Include(g => g.User).Include(g => g.Game).Where(g => g.User.AccountId == 1).ToList();
+                Random rng = new Random();
+                a = gameList[rng.Next(0,gameList.Count)].Game.GameName;
             }
 
                 return Json(new
                 { test = a
                 });
+        }
+
+        [HttpGet]
+        public IActionResult TestAllGames()
+        {
+
+            using (var db = new WgsipContext())
+            {
+                try
+                {
+                    var a = db.Games.Include(g => g.Publisher).Include(g => g.Genre).OrderBy(g => g.GameName).ToList();
+                    return Json(new
+                    {
+                        test = a
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    return Json(new
+                    {
+                        test = e.Message
+                    });
+                }
+            }
         }
 
 
@@ -46,7 +73,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             {
                 try
                 {
-                    var a = db.PlayedGames.Include(g => g.User).Where(g => g.User.AccountId == 1).ToList();
+                    var a = db.PlayedGames.Include(g => g.User).Include(g => g.Game).Where(g => g.User.AccountId == 1).ToList();
                     return Json(new
                     {
                         test = a

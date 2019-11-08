@@ -10,8 +10,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
     public class PlayedGames
     {
         public int PlayedGamesId { get; set; }
+
         [Required]
-        public String GameName { get; set; }
+        [ForeignKey("GameId")]
+        public Game Game { get; set; }
         public bool PlayedGame { get; set; }
         [Required]
         [ForeignKey("AccountId")]

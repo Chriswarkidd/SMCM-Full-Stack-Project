@@ -50,7 +50,7 @@ class Table extends React.Component {
                     <tbody>
                         {this.state.games.map((g, index) => (<tr key={index}>
                             <td>
-                                {g.gameName}
+                                {g.game.gameName}
                             </td>
                             <td>
                                 <input type="checkbox" defaultChecked={g.playedGame} />

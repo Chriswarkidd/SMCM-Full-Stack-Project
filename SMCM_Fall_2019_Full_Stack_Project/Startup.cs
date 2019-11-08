@@ -37,10 +37,13 @@ namespace SMCM_Fall_2019_Full_Stack_Project
 
             services.AddControllersWithViews();
 
-            //if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+
+            //Use this when working with a local database
+
             //    services.AddDbContext<WgsipContext>(options =>
-            //            options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
-            //else
+            //            options.UseSqlServer(Configuration.GetConnectionString("con")));
+
+            //use this when publishing the application
                 services.AddDbContext<WgsipContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
 
