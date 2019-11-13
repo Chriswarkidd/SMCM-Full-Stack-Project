@@ -11,7 +11,8 @@
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
-    ajaxTest(obj){
+    ajaxTest(obj) {
+        obj.setState({ text: "loading..." });
         $.ajax({ url: "/Home/Test"}).done(
             function (result) {
                 obj.setState({
@@ -66,6 +67,7 @@
                                     <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
                                 </div>) :
                                 (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
+                            <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%"}} src={"/Files/game_cart_bounce.gif"} />
                         </div>
                     </div>
                     <div className={"col-md-3"}/>
