@@ -35,7 +35,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
 
                 return Json(new
-                { test = a
+                { 
+                    test = a
                 });
         }
 
