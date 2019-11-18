@@ -11,6 +11,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         public int AccountId { get; set; }
         [Required]
         public String AccountEmail { get; set; }
-
+        [Required]
+        public String AccountPassword { get; set; }
     }
 }

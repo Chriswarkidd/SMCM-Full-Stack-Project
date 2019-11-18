@@ -4,16 +4,16 @@
         super(props);
         this.state = {
             text: "What Game Should I Play?",
-            recommended : false,
+            recommended: false
         };
     }
 
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
-    ajaxTest(obj) {
+    ajaxTest(obj, genre) {
         obj.setState({ text: "loading..." });
-        $.ajax({ url: "/Home/Test"}).done(
+        $.ajax({ url: "/Home/Test", data: { genre: genre === "Any" ? "" : genre } }).done(
             function (result) {
                 obj.setState({
                     text: result.test,
@@ -31,7 +31,7 @@
                         <div className={"row"}>
                             <div style={{ paddingRight: "50px" }}>
                                 <h1 className={"select-homepage"}>Genre:</h1>
-                                <select className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
+                                <select id={"Genre"} className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
                                 <option value="Any">Any Genre</option>
                                 <option value="Action">Action</option>
                                 <option value="Adventure">Adventure</option>
@@ -64,9 +64,9 @@
                             {this.state.recommended ?
                                 (<div>
                                     <button className={"btn-accept"}> Sounds Great </button>
-                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
+                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this, $("#Genre").val())}> Roll Again </button>
                                 </div>) :
-                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
+                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this, $("#Genre").val())}> Recommend a Game </button> </div>)}
                             <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%"}} src={"/Files/game_cart_bounce.gif"} />
                         </div>
                     </div>

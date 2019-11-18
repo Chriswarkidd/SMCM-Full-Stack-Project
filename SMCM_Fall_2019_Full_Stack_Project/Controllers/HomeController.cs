@@ -23,15 +23,18 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
 
         [HttpGet]
-        public IActionResult Test()
+        public IActionResult Test(String genre = "", String rating = "", String Platform = "")
         {
             string a = "";
-
+            genre = genre ?? "";
             using (var db = new WgsipContext())
             {
-                var gameList = db.PlayedGames.Include(g => g.User).Include(g => g.Game).Where(g => g.User.AccountId == 1).ToList();
+                var gameList = db.Games.Include(g => g.Genre).ToList();
                 Random rng = new Random();
-                a = gameList[rng.Next(0,gameList.Count)].Game.GameName;
+                gameList = gameList.FindAll(
+                    g => g.Genre.GenreName.ToLower().Contains(genre.ToLower())
+                );
+                a = gameList[rng.Next(0,gameList.Count)].GameName;
             }
 
                 return Json(new
