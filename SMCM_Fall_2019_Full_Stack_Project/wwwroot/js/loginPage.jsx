@@ -9,7 +9,7 @@
     render() {
         return (
             <div>
-                <label htmlFor={"userName"} className={""}>{"User Name:"}</label>
+                <label htmlFor={"userName"} className={""}>{"Email:"}</label>
                 <div />
                 <input id={"userName"} className={"login-input"} type={"text"} />
                 <div />
