@@ -48,7 +48,7 @@ class Table extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.games.map((g, index) => (<tr key={index}>
+                        {this.state.games && this.state.games.map((g, index) => (<tr key={index}>
                             <td>
                                 {g.game.gameName}
                             </td>

@@ -58,6 +58,12 @@ a {
     background-color: #242424;
 }
 
+.navbar-account-color {
+    color: white;
+    font: bold 18px Arial;
+    background-color: #242424;
+}
+
 .navbar-text{
     color: rgba(255, 255, 255, 0.5);
 }

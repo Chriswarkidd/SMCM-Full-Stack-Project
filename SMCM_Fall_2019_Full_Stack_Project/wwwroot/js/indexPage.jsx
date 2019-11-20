@@ -4,7 +4,7 @@
         super(props);
         this.state = {
             text: "What Game Should I Play?",
-            recommended : false,
+            recommended: false
         };
     }
 
@@ -12,8 +12,17 @@
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
     ajaxTest(obj) {
+        var $genre = $("#Genre");
+        var $rating = $("#Rating");
+        var $platform = $("#Platform");
         obj.setState({ text: "loading..." });
-        $.ajax({ url: "/Home/Test"}).done(
+        $.ajax({
+            url: "/Home/Test", data: {
+                genre: $genre.val() === "Any" ? "" : $genre.val(),
+                rating: $rating.val() === "Any" ? "" : $rating.val(),
+                platform: $platform.val() === "Any" ? "" : $platform.val()
+            }
+        }).done(
             function (result) {
                 obj.setState({
                     text: result.test,
@@ -31,7 +40,7 @@
                         <div className={"row"}>
                             <div style={{ paddingRight: "50px" }}>
                                 <h1 className={"select-homepage"}>Genre:</h1>
-                                <select className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
+                                <select id={"Genre"} className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
                                 <option value="Any">Any Genre</option>
                                 <option value="Action">Action</option>
                                 <option value="Adventure">Adventure</option>
@@ -42,7 +51,7 @@
                         </div>
                             <div style={{ paddingRight: "50px", paddingLeft: "50px" }}>
                             <h2 className={"select-homepage"}>ESRB Rating:</h2>
-                                <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
+                                <select id={"Rating"} className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
                                     <option value="Any">Any Rating</option>
                                     <option value="E">Everyone</option>
                                     <option value="E10">Everyone 10+</option>
@@ -52,7 +61,7 @@
                         </div>
                             <div style={{ paddingLeft: "50px" }}>
                                 <h3 className={"select-homepage"}>Platform:</h3>
-                                <select className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
+                                <select id={"Platform"} className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
                                 <option value="Any">Any Platform</option>
                                 <option value="PC">PC</option>
                                 <option value="Xbox">Xbox</option>

@@ -14,6 +14,9 @@ using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
 using SMCM_Fall_2019_Full_Stack_Project.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SMCM_Fall_2019_Full_Stack_Project
 {
@@ -40,12 +43,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project
 
             //Use this when working with a local database
 
-            //    services.AddDbContext<WgsipContext>(options =>
-            //            options.UseSqlServer(Configuration.GetConnectionString("con")));
+            services.AddDbContext<WgsipContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("con")));
 
             //use this when publishing the application
-                services.AddDbContext<WgsipContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
+            //services.AddDbContext<WgsipContext>(options =>
+            //            options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<WgsipContext>();
 
         }
 
@@ -62,6 +67,9 @@ namespace SMCM_Fall_2019_Full_Stack_Project
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
 
             app.UseReact(config => { });
