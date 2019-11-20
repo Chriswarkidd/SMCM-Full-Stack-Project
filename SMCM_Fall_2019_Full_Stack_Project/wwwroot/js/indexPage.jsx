@@ -11,9 +11,18 @@
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
-    ajaxTest(obj, genre) {
+    ajaxTest(obj) {
+        var $genre = $("#Genre");
+        var $rating = $("#Rating");
+        var $platform = $("#Platform");
         obj.setState({ text: "loading..." });
-        $.ajax({ url: "/Home/Test", data: { genre: genre === "Any" ? "" : genre } }).done(
+        $.ajax({
+            url: "/Home/Test", data: {
+                genre: $genre.val() === "Any" ? "" : $genre.val(),
+                rating: $rating.val() === "Any" ? "" : $rating.val(),
+                platform: $platform.val() === "Any" ? "" : $platform.val()
+            }
+        }).done(
             function (result) {
                 obj.setState({
                     text: result.test,
@@ -42,7 +51,7 @@
                         </div>
                             <div style={{ paddingRight: "50px", paddingLeft: "50px" }}>
                             <h2 className={"select-homepage"}>ESRB Rating:</h2>
-                                <select className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
+                                <select id={"Rating"} className={"select-homepage"} name={"Rating"} defaultValue={"Any"}>
                                     <option value="Any">Any Rating</option>
                                     <option value="E">Everyone</option>
                                     <option value="E10">Everyone 10+</option>
@@ -52,7 +61,7 @@
                         </div>
                             <div style={{ paddingLeft: "50px" }}>
                                 <h3 className={"select-homepage"}>Platform:</h3>
-                                <select className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
+                                <select id={"Platform"} className={"select-homepage"} name={"Platform"} defaultValue={"Any"}>
                                 <option value="Any">Any Platform</option>
                                 <option value="PC">PC</option>
                                 <option value="Xbox">Xbox</option>
@@ -64,9 +73,9 @@
                             {this.state.recommended ?
                                 (<div>
                                     <button className={"btn-accept"}> Sounds Great </button>
-                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this, $("#Genre").val())}> Roll Again </button>
+                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
                                 </div>) :
-                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this, $("#Genre").val())}> Recommend a Game </button> </div>)}
+                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
                             <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%"}} src={"/Files/game_cart_bounce.gif"} />
                         </div>
                     </div>
