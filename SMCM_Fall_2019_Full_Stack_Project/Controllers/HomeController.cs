@@ -78,12 +78,24 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             platform = platform ?? "";
             using (var db = new WgsipContext())
             {
+                List<PlayedGames> userGames;
+                if (User.Identity.IsAuthenticated)
+                {
+                    userGames = db.PlayedGames.Include(g => g.User).Include(g => g.Game)
+                        .Where(g => g.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower()))
+                        .ToList();
+                }
+                else
+                {
+                   userGames = new List<PlayedGames>();
+                }
                 var gameList = db.Games.Include(g => g.Genre).ToList();
                 Random rng = new Random();
                 gameList = gameList.FindAll(
                     g => g.Genre.GenreName.ToLower().Contains(genre.ToLower()) 
                     && g.EsrbRating.ToLower().Contains(rating.ToLower())
                     && g.Platforms.ToLower().Contains(platform.ToLower())
+                    && !userGames.Any(ug => ug.Game.GameName.ToLower().Equals(g.GameName.ToLower()))
                 );
                 if (!gameList.Any()) return Json(new
                 {
