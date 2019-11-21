@@ -29,6 +29,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             _signInManager = signInManager;
         }
 
+
+        #region api
         [HttpPost]
         public async Task<IActionResult> CreateAccount(String username, String password)
         {
@@ -49,6 +51,68 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 return Json(new { a = true });
             }
             return Json(new {a = result.Errors.ToArray()});
+        }
+
+        [HttpGet]
+        public IActionResult SoundsGood(String game)
+        {
+            if (!User.Identity.IsAuthenticated)
+            return Json(new {message = "You need to be logged in to add a game to your game list."});
+
+            try
+            {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Account user = db.Accounts.First(a => a.AccountEmail == User.Identity.Name);
+                    Game gameEntry = db.Games.First(g => g.GameName.ToLower().Equals(game.ToLower()));
+                    PlayedGames playedGame = new PlayedGames();
+                    playedGame.User = user;
+                    playedGame.Game = gameEntry;
+                    playedGame.PlayedGame = false;
+                    if (!db.PlayedGames.Include(pg => pg.Game)
+                        .Include(pg => pg.User)
+                        .Any(pg => pg.Game == gameEntry
+                        && pg.User == user))
+                    {
+                        db.PlayedGames.Add(playedGame);
+                        db.SaveChanges();
+                        return Json(new { message = "Game added to your games list! 😆" });
+                    }
+                    else
+                    {
+                        return Json(new { message = "The game is already in your games list." });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult HasPlayed(String game)
+        {
+            try
+            {
+                using (var db = new WgsipContext())
+                {
+                    db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
+                        .First(pg =>
+                        pg.Game.GameName.ToLower().Equals(game.ToLower())
+                        && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
+                        ).PlayedGame = true;
+                    db.SaveChanges();
+                }
+                return Json(new { message = "success" });
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { message = e.Message });
+            }
         }
 
         [HttpPost]
@@ -169,6 +233,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             String game = "Divinity 2: Original Sin";
             return Json(new { test = game });
         }
+
+        #endregion
+
+        #region page direction
         public IActionResult Index()
         {
             ViewBag.loggedIn = User.Identity.IsAuthenticated;
@@ -211,5 +279,6 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #endregion
     }
 }

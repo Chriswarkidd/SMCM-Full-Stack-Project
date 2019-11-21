@@ -18,12 +18,13 @@ class Table extends React.Component {
             games: []
         };
         this.ajaxTest(this);
-        //this.games = [{ title: "Ark: Survival Evolved", played: true },
-        //    { title: "Astroneer", played: true },
-        //    { title: "Destiny 2", played: true },
-        //    { title: "Divinity 2", played: false },
-        //    { title: "Fable", played: false },
-        //    { title: "Zuma's Revenge", played: true }];
+    }
+
+    hasPlayed(obj, gameName) {
+        $.ajax({ url: "/Home/HasPlayed", data: { game: gameName} }).done(
+            function (result) {
+                obj.ajaxTest(obj);
+            });
     }
 
     ajaxTest(obj) {
@@ -53,7 +54,11 @@ class Table extends React.Component {
                                 {g.game.gameName}
                             </td>
                             <td>
-                                <input type="checkbox" defaultChecked={g.playedGame} />
+                                {
+                                    g.playedGame ?
+                                        (<input type="checkbox" checked={g.playedGame} readOnly={true}/>) :
+                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.game.gameName)}/>)
+                                }
                             </td>
                         </tr>))}
                     </tbody>

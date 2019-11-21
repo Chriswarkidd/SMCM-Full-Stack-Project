@@ -8,6 +8,18 @@
         };
     }
 
+    soundGood(obj) {
+        $.ajax({
+            url: "/Home/SoundsGood", data: {
+                game: obj.state.text
+            }
+        }).done(
+            function (result) {
+                 alert(result.message);
+            });
+    }
+
+
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
@@ -72,7 +84,7 @@
                             <h3 style={this.state.recommended ? { paddingLeft: "40%", font: 'bold 30 Arial' } : {}}>{this.state.text}</h3>
                             {this.state.recommended ?
                                 (<div>
-                                    <button className={"btn-accept"}> Sounds Great </button>
+                                    <button className={"btn-accept"} onClick={() => this.soundGood(this)}> Sounds Great </button>
                                     <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
                                 </div>) :
                                 (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
