@@ -51,7 +51,7 @@
                     <div className={"col-md-6"}>
                         <div className={"row"}>
                             <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%", paddingRight: "22.5%" }} src={"/Files/game_cart_bounce.gif"} />
-                            <h3 style={{ width: "500px", textAlign: "center", font: 'bold 30 Arial' }}>{this.state.text}</h3>
+                            <h3 style={{ width: "500px", textAlign: "center", paddingBottom: "10px", font: "bold 30 Arial" }}>{this.state.text}</h3>
                             {this.state.recommended ?
                                 (<div style={{paddingBottom: "5%"}}>
                                     <button style={{ width: "250px"}} className={"btn btn-accept"} onClick={() => this.soundGood(this)}> Sounds Great </button>
