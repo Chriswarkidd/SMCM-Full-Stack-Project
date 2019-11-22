@@ -34,6 +34,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAccount(String username, String password)
         {
+            List<string> s = new List<string>();
+            if (username == null) s.Add("You must enter an email");
+            if (password == null) s.Add("Password cannot be empty");
+            if (password == null || username == null) return Json(new { a = s });
             IdentityUser user = new IdentityUser { UserName = username, Email = username, };
             IdentityResult result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
