@@ -189,9 +189,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 try
                 {
                     var a = db.Games.Include(g => g.Publisher).Include(g => g.Genre).OrderBy(g => g.GameName).ToList();
+                    List<GameDTO> games = new List<GameDTO>();
+                    foreach (var g in a)
+                    {
+                        games.Add(new GameDTO(g));
+                    }
                     return Json(new
                     {
-                        test = a
+                        test = games
                     });
 
                 }
