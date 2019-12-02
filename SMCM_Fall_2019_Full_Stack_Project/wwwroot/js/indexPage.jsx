@@ -50,6 +50,14 @@
                     <div className={"col-md-3"}/>
                     <div className={"col-md-6"}>
                         <div className={"row"}>
+                            <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%", paddingRight: "22.5%" }} src={"/Files/game_cart_bounce.gif"} />
+                            <h3 style={{ width: "500px", textAlign: "center", paddingBottom: "10px", font: "bold 30 Arial" }}>{this.state.text}</h3>
+                            {this.state.recommended ?
+                                (<div style={{paddingBottom: "5%"}}>
+                                    <button style={{ width: "250px"}} className={"btn btn-accept"} onClick={() => this.soundGood(this)}> Sounds Great </button>
+                                    <button style={{ width: "250px"}} className={"btn btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
+                                </div>) :
+                                (<div style={{ paddingBottom: "5%" }}> <button style={{ width: "500px" }} className={"btn btn-primary"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
                             <div style={{ paddingRight: "50px" }}>
                                 <h1 className={"select-homepage"}>Genre:</h1>
                                 <select id={"Genre"} className={"select-homepage"} name={"Genre"} defaultValue={"Any"}>
@@ -81,14 +89,7 @@
                                 <option value="Switch">Switch</option>
                             </select>
                             </div>
-                            <h3 style={this.state.recommended ? { paddingLeft: "40%", font: 'bold 30 Arial' } : {}}>{this.state.text}</h3>
-                            {this.state.recommended ?
-                                (<div>
-                                    <button className={"btn-accept"} onClick={() => this.soundGood(this)}> Sounds Great </button>
-                                    <button className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Roll Again </button>
-                                </div>) :
-                                (<div> <button style={{ width: "500px" }} className={"btn-accept"} onClick={() => this.ajaxTest(this)}> Recommend a Game </button> </div>)}
-                            <img style={{ paddingLeft: "22.5%", paddingTop: "2.5%"}} src={"/Files/game_cart_bounce.gif"} />
+                            
                         </div>
                     </div>
                     <div className={"col-md-3"}/>
