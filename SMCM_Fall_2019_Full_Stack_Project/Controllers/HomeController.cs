@@ -221,9 +221,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 try
                 {
                     var a = db.PlayedGames.Include(g => g.User).Include(g => g.Game).Where(g => g.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())).ToList();
+                    List<PlayedGameDTO> games = new List<PlayedGameDTO>();
+                    foreach (var g in a)
+                    {
+                        games.Add(new PlayedGameDTO(g));
+                    }
                     return Json(new
                     {
-                        test = a
+                        test = games
                     });
 
                 }

@@ -89,13 +89,13 @@ class Table extends React.Component {
                     <tbody>
                         {this.state.games && this.state.games.map((g, index) => (<tr key={index}>
                             <td>
-                                {g.game.gameName}
+                                {g.gameName}
                             </td>
                             <td>
                                 {
                                     g.playedGame ?
                                         (<input type="checkbox" checked={g.playedGame} readOnly={true}/>) :
-                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.game.gameName)}/>)
+                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.gameName)}/>)
                                 }
                             </td>
                         </tr>))}
