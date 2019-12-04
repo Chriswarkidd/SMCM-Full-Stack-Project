@@ -5,6 +5,7 @@
             <div align="center">
                 <h1> My Games</h1>
                 <Table/>
+                <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"}> Save Changes </button> </div>
                 <button className={"btn-delete"}> Delete Account </button>
             </div>
         );
@@ -22,8 +23,17 @@ class Table extends React.Component {
         this.getAllGames(this);
     }
 
+
     hasPlayed(obj, gameName) {
         $.ajax({ url: "/Home/HasPlayed", data: { game: gameName} }).done(
+            function (result) {
+                obj.ajaxTest(obj);
+            });
+    }
+
+    //create a list of game names to be updated when save changes is clicked
+    saveChanges(obj, gameName) {
+        $.ajax({ url: "/Home/HasPlayed", data: { game: gameName } }).done(
             function (result) {
                 obj.ajaxTest(obj);
             });
