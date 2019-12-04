@@ -46,9 +46,9 @@ class Table extends React.Component {
                     <tbody>
                         {this.state.games.map((g, index) => (<tr key={index}>
                             <td>{g.gameName}</td>
-                            <td>{g.publisher.publisherName}</td>
+                            <td>{g.publisher}</td>
                             <td>{new Date(g.datePublished).getFullYear()}</td>
-                            <td>{g.genre.genreName}</td>
+                            <td>{g.genre}</td>
                             <td>{g.esrbRating}</td>
                             <td>{g.platforms}</td>
                         </tr>))}

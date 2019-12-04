@@ -15,9 +15,11 @@ class Table extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: []
+            games: [],
+            listOfGames: []
         };
         this.ajaxTest(this);
+        this.getAllGames(this);
     }
 
     hasPlayed(obj, gameName) {
@@ -34,9 +36,45 @@ class Table extends React.Component {
             });
     }
 
+    getAllGames(obj) {
+        $.ajax({ url: "/Home/TestAllGames" }).done(
+            function (result) {
+                obj.setState({ listOfGames: result.test });
+            });
+    }
+
     render() {
+
+        var modal = (<div id={"addModal"} className={"modal fade"}>
+            <div className={"modal-dialog"}>
+                <div className={"modal-content"}>
+                    <div className={"modal-header"}>
+                        <h4>Add a Game!</h4>
+                        <button className={"close"} data-dismiss="modal">
+                            <span className={"fas fa-times"}/>
+                        </button>
+                    </div>
+                    <div className={"modal-body"}>
+                        <label htmlFor={"GameList"}>Game: </label>
+                        <select id={"GameList"} defaultValue={""}>
+                            <option value="">Select an existing game</option>
+                            {
+                                this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
+                            }
+                        </select>
+                    </div>
+                    <div className={"modal-footer"}>
+                        <button className={"btn-accept"} data-dismiss="modal">Add</button>
+                        <button className={"btn-accept"} data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>);
+
         return (
             <div>
+                {modal}
+                <button className={"btn-primary"} data-toggle={"modal"} data-target={"#addModal"}>Add a game!</button>
                 <table className={"table table-striped"}>
                     <thead>
                         <tr>
@@ -54,13 +92,13 @@ class Table extends React.Component {
                     <tbody>
                         {this.state.games && this.state.games.map((g, index) => (<tr key={index}>
                             <td>
-                                {g.game.gameName}
+                                {g.gameName}
                             </td>
                             <td>
                                 {
                                     g.playedGame ?
                                         (<input type="checkbox" checked={g.playedGame} readOnly={true}/>) :
-                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.game.gameName)}/>)
+                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.gameName)}/>)
                                 }
                             </td>
                             <td>
