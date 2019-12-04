@@ -55,13 +55,22 @@ class Table extends React.Component {
                         </button>
                     </div>
                     <div className={"modal-body"}>
+                        <div class={"row"}>
+                            <div class={"col-sm-12"}>
                         <label htmlFor={"GameList"}>Game: </label>
                         <select id={"GameList"} defaultValue={""}>
                             <option value="">Select an existing game</option>
                             {
                                 this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
                             }
-                        </select>
+                                </select>
+                                </div>
+                        </div>
+                        <div class={"row"}>
+                            <div class={"col-sm-12"}>
+                                <button className={"btn btn-link"} role={"link"} data-dismiss="modal">Can't Find Your Game?</button>
+                                </div>
+                            </div>
                     </div>
                     <div className={"modal-footer"}>
                         <button className={"btn-accept"} data-dismiss="modal">Add</button>
