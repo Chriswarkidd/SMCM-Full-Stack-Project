@@ -18,6 +18,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<TagWeights> TagWeights { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             //use this when working with a local database

@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace SMCM_Fall_2019_Full_Stack_Project.Models
 {
-    public class PlayedGames
+    public class TagWeights
     {
-        public int PlayedGamesId { get; set; }
+        public int TagWeightsId { get; set; }
 
         [Required]
-        [ForeignKey("GameId")]
-        public Game Game { get; set; }
-        public bool PlayedGame { get; set; }
+        [ForeignKey("TagId")]
+        public Tag Tag { get; set; }
         [Required]
         [ForeignKey("AccountId")]
         public Account User { get; set; }
-        public Int16 Rating { get; set; }
+        public int  Weight{ get; set; }
     }
 }

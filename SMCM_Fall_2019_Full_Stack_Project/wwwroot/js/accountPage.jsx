@@ -106,7 +106,6 @@ class Table extends React.Component {
                                     g.playedGame ?
                                         (<div >
                                             <select id={"Rating"} className={"select-accountpage"} name={"Rating"} defaultValue={"3"}>
-                                                <option value="0">0</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
