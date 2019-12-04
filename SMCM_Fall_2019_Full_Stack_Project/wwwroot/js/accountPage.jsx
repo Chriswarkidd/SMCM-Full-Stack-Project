@@ -114,7 +114,9 @@ class Table extends React.Component {
                                                 <option value="5">5</option>
                                             </select>
                                         </div>) :
-                                        (<div></div>)
+                                        (<div>
+                                            N/A
+                                        </div>)
                  
                                 }
                             </td>
