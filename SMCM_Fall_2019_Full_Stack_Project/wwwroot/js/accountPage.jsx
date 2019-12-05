@@ -84,6 +84,9 @@ class Table extends React.Component {
                             <th>
                                 Played
                     </th>
+                            <th>
+                                Rating
+                    </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,6 +99,24 @@ class Table extends React.Component {
                                     g.playedGame ?
                                         (<input type="checkbox" checked={g.playedGame} readOnly={true}/>) :
                                         (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.gameName)}/>)
+                                }
+                            </td>
+                            <td>
+                                {
+                                    g.playedGame ?
+                                        (<div >
+                                            <select id={"Rating"} className={"select-accountpage"} name={"Rating"} defaultValue={"3"}>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>) :
+                                        (<div>
+                                            N/A
+                                        </div>)
+                 
                                 }
                             </td>
                         </tr>))}
