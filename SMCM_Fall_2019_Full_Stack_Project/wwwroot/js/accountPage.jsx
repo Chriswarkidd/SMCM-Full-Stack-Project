@@ -16,7 +16,8 @@ class Table extends React.Component {
         super(props);
         this.state = {
             games: [],
-            listOfGames: []
+            listOfGames: [],
+            addGameRequest : false
         };
         this.ajaxTest(this);
         this.getAllGames(this);
@@ -43,6 +44,13 @@ class Table extends React.Component {
             });
     }
 
+    addNewGameForm(obj) {
+        $.ajax({ url: "/Home/AddNewGame" }).done(
+            function (result) {
+                obj.setState({ addGameRequest: true });
+        });
+    }
+
     render() {
 
         var modal = (<div id={"addModal"} className={"modal fade"}>
@@ -66,11 +74,13 @@ class Table extends React.Component {
                                 </select>
                                 </div>
                         </div>
-                        <div class={"row"}>
-                            <div class={"col-sm-12"}>
-                                <button className={"btn btn-link"} role={"link"} data-dismiss="modal">Can't Find Your Game?</button>
+                        {this.state.addGameRequest ?
+                            (<div class={"row"}><p>test paragraph</p></div>) :
+                            (<div class={"row"}>
+                                <div class={"col-sm-12"}>
+                                    <button className={"btn btn-link"} role={"link"} onClick={() => this.addNewGameForm(this)}>Can't Find Your Game?</button>
                                 </div>
-                            </div>
+                            </div>)}
                     </div>
                     <div className={"modal-footer"}>
                         <button className={"btn-accept"} data-dismiss="modal">Add</button>
