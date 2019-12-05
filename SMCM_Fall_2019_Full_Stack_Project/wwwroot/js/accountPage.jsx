@@ -5,7 +5,6 @@
             <div align="center">
                 <h1> My Games</h1>
                 <Table/>
-                <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"}> Save Changes </button> </div>
                 <button className={"btn-delete"}> Delete Account </button>
             </div>
         );
@@ -19,30 +18,36 @@ class Table extends React.Component {
             games: [],
             listOfGames: []
         };
+        this.updatedGames = [];
         this.ajaxTest(this);
         this.getAllGames(this);
     }
 
 
-    hasPlayed(obj, gameName) {
-        $.ajax({ url: "/Home/HasPlayed", data: { game: gameName} }).done(
-            function (result) {
-                obj.ajaxTest(obj);
-            });
+    hasPlayed(obj, index) {
+        alert(obj.updatedGames[index][1]);
+        obj.updatedGames[index][1] = !obj.updatedGames[index][1];
+        alert(obj.updatedGames[index][1]);
     }
 
     //create a list of game names to be updated when save changes is clicked
-    saveChanges(obj, gameName) {
-        $.ajax({ url: "/Home/HasPlayed", data: { game: gameName } }).done(
+    saveChanges(obj) {
+        jQuery.ajaxSettings.traditional = true;
+        $.ajax({ url: "/Home/HasPlayed", data: { gameList: obj.updatedGames } }).done(
             function (result) {
                 obj.ajaxTest(obj);
-            });
+              });
     }
 
     ajaxTest(obj) {
+        obj.updatedGames = [];
         $.ajax({ url: "/Home/TestGameList" }).done(
             function (result) {
                 obj.setState({ games: result.test });
+                for (var g in result.test) {
+                    obj.updatedGames.push([result.test[g].gameName, result.test[g].playedGame]);
+                }
+                alert(obj.updatedGames[0][0]);
             });
     }
 
@@ -105,12 +110,13 @@ class Table extends React.Component {
                                 {
                                     g.playedGame ?
                                         (<input type="checkbox" checked={g.playedGame} readOnly={true}/>) :
-                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, g.gameName)}/>)
+                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, index)}/>)
                                 }
                             </td>
                         </tr>))}
                     </tbody>
                 </table>
+                <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"} onClick={() => this.saveChanges(this)}> Save Changes </button> </div>
             </div>
         );
     }
