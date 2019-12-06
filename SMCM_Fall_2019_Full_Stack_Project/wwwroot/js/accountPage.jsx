@@ -1,4 +1,5 @@
-﻿class Account extends React.Component {
+﻿
+class Account extends React.Component {
 
     render() {
         return (
@@ -45,10 +46,7 @@ class Table extends React.Component {
     }
 
     addNewGameForm(obj) {
-        $.ajax({ url: "/Home/AddNewGame" }).done(
-            function (result) {
-                obj.setState({ addGameRequest: true });
-        });
+        obj.setState({ addGameRequest: !obj.state.addGameRequest });
     }
 
     render() {
@@ -63,28 +61,69 @@ class Table extends React.Component {
                         </button>
                     </div>
                     <div className={"modal-body"}>
-                        <div class={"row"}>
-                            <div class={"col-sm-12"}>
-                        <label htmlFor={"GameList"}>Game: </label>
-                        <select id={"GameList"} defaultValue={""}>
-                            <option value="">Select an existing game</option>
-                            {
-                                this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
-                            }
-                                </select>
-                                </div>
-                        </div>
                         {this.state.addGameRequest ?
-                            (<div class={"row"}><p>test paragraph</p></div>) :
-                            (<div class={"row"}>
+                            (<div className={"container"}>
+                                <div className={"formGroup"}>
+                                <form>
+                                        <label for={"gameName"}>Name:</label>
+                                        <input id={"gameName"} className={"form-control"} type={"text"} placeholder={"Game Name"}></input>
+                                    </form>
+                                    <div className={"formGroup"}>
+                                        <form>
+                                            <label for={"gameYear"}>Publishing Year:</label>
+                                            <input id={"gameYear"} className={"form-control"} type={"text"} placeholder={"Publishing Year"}></input>
+                                        </form>
+                                    </div>
+                                    <div className={"formGroup"}>
+                                        <form>
+                                            <label for={"esrbRating"}>Age Rating:</label>
+                                            <select name={"esrbRating"}>
+                                                <option selected>Select a Rating</option>
+                                                <option value={"E"}>E</option>
+                                                <option value={"E10"}>E10</option>
+                                                <option value={"E10+"}>E10+</option>
+                                                <option value={"T"}>T</option>
+                                                <option value={"M"}>M</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <div className={"formGroup"}>
+                                        <form>
+                                            <label for={"genre"}>Genre:</label>
+                                            <select name={"genre"}>
+                                                <option selected>Select a Genre</option>
+                                                <option value={"Adventure"}>Adventure</option>
+                                                <option value={"Puzzle"}>Puzzle</option>
+                                                <option value={"FPS"}>FPS</option>
+                                                <option value={"RPG"}>RPG</option>
+                                                <option value={"Horror"}>Horror</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>) :
+                            (<div>
+                                <div class={"row"}>
                                 <div class={"col-sm-12"}>
+                                    <label htmlFor={"GameList"}>Game: </label>
+                                    <select id={"GameList"} defaultValue={""}>
+                                        <option value="">Select an existing game</option>
+                                        {
+                                            this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                                <div className={"row"}>
+                                <div className={"col-sm-12"}>
                                     <button className={"btn btn-link"} role={"link"} onClick={() => this.addNewGameForm(this)}>Can't Find Your Game?</button>
                                 </div>
-                            </div>)}
+                                </div>
+                                </div>)}
                     </div>
                     <div className={"modal-footer"}>
                         <button className={"btn-accept"} data-dismiss="modal">Add</button>
-                        <button className={"btn-accept"} data-dismiss="modal">Close</button>
+                        <button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGameForm(this)}>Close</button>
                     </div>
                 </div>
             </div>
