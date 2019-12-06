@@ -18,6 +18,6 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         [Required]
         [ForeignKey("AccountId")]
         public Account User { get; set; }
-        public Int16 Rating { get; set; }
+        public Int16? Rating { get; set; }
     }
 }
