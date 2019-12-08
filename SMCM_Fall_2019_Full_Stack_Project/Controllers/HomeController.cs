@@ -97,17 +97,22 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult HasPlayed(String game)
+        public IActionResult HasPlayed(String[][] gameList)
         {
             try
             {
                 using (var db = new WgsipContext())
                 {
-                    db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
+                    foreach (var gameA in gameList)
+                    {
+                        var game = gameA[0].Split(',');
+                        db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
                         .First(pg =>
-                        pg.Game.GameName.ToLower().Equals(game.ToLower())
+                        pg.Game.GameName.ToLower().Equals(game[0].ToLower())
                         && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
-                        ).PlayedGame = true;
+                        ).PlayedGame = game[1] == "true" ? true : false;
+                    }
+
                     db.SaveChanges();
                 }
                 return Json(new { message = "success" });
