@@ -97,7 +97,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult DeleteAccount()
+        public async Task<IActionResult> DeleteAccountAsync()
         {
             if (!User.Identity.IsAuthenticated)
                 return Json(new { message = "You need to be logged in to delete your account" });
@@ -108,9 +108,11 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 {
                     Account user = db.Accounts.First(a => a.AccountEmail == User.Identity.Name);
                     db.Accounts.Remove(user);
+                    db.Users.Remove(db.Users.Where(u => u.Email == user.AccountEmail).First());
+                    await _signInManager.SignOutAsync();
                     db.SaveChanges();
                 }
-                return Json(new { message = "Account Deleted" });
+                return Json(new { message = "Account Deleted", success = true });
             }
             catch (Exception e)
             {

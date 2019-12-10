@@ -1,12 +1,44 @@
 ﻿
 class Account extends React.Component {
 
+    deleteAccount(obj) {
+        $.ajax({ url: "/Home/DeleteAccount" }).done(
+            function (result) {
+                if (result.success) {
+                    alert("Account Deleted");
+                    window.location.href = "/Home/Index";
+                }
+            });
+    }
+
     render() {
+        var modal = (<div id={"deleteModal"} className={"modal fade"}>
+            <div className={"modal-dialog"}>
+                <div className={"modal-content"}>
+                    <div className={"modal-header"}>
+                        <h4>Delete Account</h4>
+                        <button className={"close"} data-dismiss="modal">
+                            <span className={"fas fa-times"} />
+                        </button>
+                    </div>
+                    <div className={"modal-body"}>
+                        <h6>Waring: </h6>
+                        <p>Your account and any information associated with it will be permanently deleted</p>
+                        <p>Are you sure you wish to continue?</p>
+                    </div>
+                    <div className={"modal-footer"}>
+                        <button className={"btn-delete"} data-dismiss="modal" onClick={() => this.deleteAccount(this)}>Delete</button>
+                        <button className={"btn-accept"} data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>);
         return (
             <div align="center">
                 <h1> My Games</h1>
-                <Table/>
-                <button className={"btn-delete"}> Delete Account </button>
+                {modal}
+                <Table />
+                <button className={"btn-delete"} data-toggle={"modal"} data-target={"#deleteModal"}> Delete Account </button>
             </div>
         );
     }
@@ -116,8 +148,8 @@ class Table extends React.Component {
                                 </div>
                             </div>) :
                             (<div>
-                                <div class={"row"}>
-                                <div class={"col-sm-12"}>
+                                <div className={"row"}>
+                                <div className={"col-sm-12"}>
                                     <label htmlFor={"GameList"}>Game: </label>
                                     <select id={"GameList"} defaultValue={""}>
                                         <option value="">Select an existing game</option>
