@@ -12,5 +12,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
 
         [Required]
         public String GenreName { get; set; }
+
+        public override string ToString()
+        {
+            return GenreName;
+        }
     }
 }
