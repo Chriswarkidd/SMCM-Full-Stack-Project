@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SMCM_Fall_2019_Full_Stack_Project.Models;
+using System.Reflection;
 
 namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 {
@@ -20,7 +21,6 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        //private readonly JWTSettings _options;
 
         public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
@@ -86,6 +86,68 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                     {
                         return Json(new { message = "The game is already in your games list." });
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeleteAccountAsync()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return Json(new { message = "You need to be logged in to delete your account" });
+
+            try
+            {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Account user = db.Accounts.First(a => a.AccountEmail == User.Identity.Name);
+                    db.Accounts.Remove(user);
+                    db.Users.Remove(db.Users.Where(u => u.Email == user.AccountEmail).First());
+                    await _signInManager.SignOutAsync();
+                    db.SaveChanges();
+                }
+                return Json(new { message = "Account Deleted", success = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult SearchGames(string searchTerm)
+        {
+            List<GameDTO> games = new List<GameDTO>();
+            //Not the best use of reflection, but reduces amount of typing required.
+            Func<Game, bool> Predicate = delegate(Game a) {
+                //loops through all the properties, and sees if the search term is included.
+                foreach (var item in a.GetType().GetProperties())
+                {
+                    if (item.Name.Contains("Id")) continue;//skip over Id columns
+                    if (item.GetValue(a).ToString().ToLower().Contains(searchTerm.ToLower())) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            try
+            {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    List<Game> resultingGames = db.Games.Include(g => g.Genre).Include(g => g.Publisher).Where(Predicate).ToList();
+                    foreach (Game g in resultingGames)
+                    {
+                        games.Add(new GameDTO(g));
+                    }
+                    return Json(new { gamesList = games, success = true });
                 }
             }
             catch (Exception e)

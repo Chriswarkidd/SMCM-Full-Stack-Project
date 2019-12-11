@@ -46,6 +46,11 @@ a {
     border-radius: 20px;
 }
 
+.searchPage-div {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
