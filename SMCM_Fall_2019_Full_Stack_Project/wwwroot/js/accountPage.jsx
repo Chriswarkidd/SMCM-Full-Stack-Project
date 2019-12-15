@@ -72,6 +72,15 @@ class Table extends React.Component {
             });
     }
 
+    changeRating(obj, gName, index) {
+        $rating = $("#Rating"+index)
+        jQuery.ajaxSettings.traditional = true;
+        $.ajax({ url: "/Home/Rate", data: { gameName: gName, rating: $rating.val() } }).done(
+            function (result) {
+                
+            });
+    }
+
     ajaxTest(obj) {
         obj.updatedGames = [];
         $.ajax({ url: "/Home/TestGameList" }).done(
@@ -208,7 +217,8 @@ class Table extends React.Component {
                                     {
                                         g.playedGame ?
                                             (<div >
-                                                <select id={"Rating"} className={"select-accountpage"} name={"Rating"} defaultValue={"3"}>
+                                            <select id={"Rating" + index} className={"select-accountpage"}
+                                                name={"Rating"} defaultValue={g.rating ? g.rating : "3"} onClick={() => this.changeRating(this, g.gameName, index)}>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
