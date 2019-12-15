@@ -186,6 +186,31 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Rate(String gameName, Int16 rating)
+        {
+            try
+            {
+                using (var db = new WgsipContext())
+                {
+                    db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
+                    .First(pg =>
+                    pg.Game.GameName.ToLower().Equals(gameName.ToLower())
+                    && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
+                    ).Rating = rating;
+
+                    db.SaveChanges();
+                }
+                return Json(new { message = "success" });
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { message = e.Message });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> LogIn(String username, String password)
         {
