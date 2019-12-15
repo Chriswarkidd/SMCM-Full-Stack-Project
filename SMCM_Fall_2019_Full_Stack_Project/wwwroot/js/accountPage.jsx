@@ -107,9 +107,9 @@ class Table extends React.Component {
                                                 <option selected>Select a Genre</option>
                                                 <option value={"Adventure"}>Adventure</option>
                                                 <option value={"Puzzle"}>Puzzle</option>
-                                                <option value={"FPS"}>FPS</option>
-                                                <option value={"RPG"}>RPG</option>
-                                                <option value={"Horror"}>Horror</option>
+                                                <option value={"Action"}>Action</option>
+                                                <option value={"Simulation"}>Simuation</option>
+                                                <option value={"Sports"}>Sports</option>
                                             </select>
                                         </form>
                                     </div>
