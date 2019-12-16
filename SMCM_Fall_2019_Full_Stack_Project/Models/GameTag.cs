@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMCM_Fall_2019_Full_Stack_Project.Models
 {
@@ -17,6 +13,6 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         [Required]
         [ForeignKey("TagId")]
         public Tag Tag { get; set; }
-   
+
     }
 }

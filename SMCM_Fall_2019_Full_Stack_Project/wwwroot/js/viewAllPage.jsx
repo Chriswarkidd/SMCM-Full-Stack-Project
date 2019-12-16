@@ -1,5 +1,11 @@
-﻿class GamesPage extends React.Component {
+﻿/*
+ * This class is the View all games page
+ * This is where users can view all the games we have on our database and add one if 
+ */
 
+
+class GamesPage extends React.Component {
+    //render page
     render() {
         return (
             <div align="center">
@@ -9,7 +15,7 @@
         );
     }
 }
-
+//create table that will desplay
 class Table extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +31,7 @@ class Table extends React.Component {
                 obj.setState({ games: result.test });
             });
     }
-
+    //search function for the database
     search(obj) {
         var $searchTerm = $("#gameSearch");
         $.ajax({ url: "/Home/SearchGames", data: { searchTerm: $searchTerm.val() } }).done(
@@ -35,7 +41,7 @@ class Table extends React.Component {
                 }
             });
     }
-
+    //render the table
     render() {
         return (
             <React.Fragment>

@@ -1,4 +1,9 @@
-﻿class TestReactComponent extends React.Component {
+﻿/*
+ * This class is the main page of the website
+ * From here users can login, sign up, view their account, view our games database and get a game recommended
+ */
+
+class TestReactComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -7,7 +12,7 @@
             recommended: false
         };
     }
-
+    //method for Sounds Great button click to add game to account
     soundGood(obj) {
         $.ajax({
             url: "/Home/SoundsGood", data: {
@@ -42,7 +47,7 @@
                 }); 
             });
     }
-
+    //render main page
     render() {
         return (
             <div className={"container-fluid"}>
@@ -97,7 +102,7 @@
             </div>
 
         );
-    }
-}
+    }//end render
+}//end class
 
 ReactDOM.render(<TestReactComponent />, document.getElementById('content'));

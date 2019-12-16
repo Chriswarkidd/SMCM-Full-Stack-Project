@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SMCM_Fall_2019_Full_Stack_Project.Models;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 {
@@ -54,14 +50,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 }
                 return Json(new { a = true });
             }
-            return Json(new {a = result.Errors.ToArray()});
+            return Json(new { a = result.Errors.ToArray() });
         }
 
         [HttpGet]
         public IActionResult SoundsGood(String game)
         {
             if (!User.Identity.IsAuthenticated)
-            return Json(new {message = "You need to be logged in to add a game to your game list."});
+                return Json(new { message = "You need to be logged in to add a game to your game list." });
 
             try
             {
@@ -126,12 +122,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         {
             List<GameDTO> games = new List<GameDTO>();
             //Not the best use of reflection, but reduces amount of typing required.
-            Func<Game, bool> Predicate = delegate(Game a) {
+            Func<Game, bool> Predicate = delegate (Game a)
+            {
                 //loops through all the properties, and sees if the search term is included.
                 foreach (var item in a.GetType().GetProperties())
                 {
                     if (item.Name.Contains("Id")) continue;//skip over Id columns
-                    if (item.GetValue(a).ToString().ToLower().Contains(searchTerm.ToLower())) {
+                    if (item.GetValue(a).ToString().ToLower().Contains(searchTerm.ToLower()))
+                    {
                         return true;
                     }
                 }
@@ -215,7 +213,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         public async Task<IActionResult> LogIn(String username, String password)
         {
             IdentityUser user = await _userManager.FindByNameAsync(username);
-            if (user == null){
+            if (user == null)
+            {
                 return Json(new { a = "Either the Email or Password provided was incorrect." });
             }
             Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
@@ -224,9 +223,9 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 ViewBag.loggedIn = User.Identity.IsAuthenticated;
                 ViewBag.accountName = User.Identity.Name;
-                return Json(new {a = true });
+                return Json(new { a = true });
             }
-            return Json(new { a = result.IsLockedOut ? "This account is currently locked out" : "Either the Email or Password provided was incorrect."});
+            return Json(new { a = result.IsLockedOut ? "This account is currently locked out" : "Either the Email or Password provided was incorrect." });
         }
 
         [HttpGet]
@@ -247,12 +246,12 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 }
                 else
                 {
-                   userGames = new List<PlayedGames>();
+                    userGames = new List<PlayedGames>();
                 }
                 var gameList = db.Games.Include(g => g.Genre).ToList();
                 Random rng = new Random();
                 gameList = gameList.FindAll(
-                    g => g.Genre.GenreName.ToLower().Contains(genre.ToLower()) 
+                    g => g.Genre.GenreName.ToLower().Contains(genre.ToLower())
                     && g.EsrbRating.ToLower().Contains(rating.ToLower())
                     && g.Platforms.ToLower().Contains(platform.ToLower())
                     && !userGames.Any(ug => ug.Game.GameName.ToLower().Equals(g.GameName.ToLower()))
@@ -261,13 +260,13 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 {
                     test = "No matching games found. 😢"
                 });
-                a = gameList[rng.Next(0,gameList.Count)].GameName;
+                a = gameList[rng.Next(0, gameList.Count)].GameName;
             }
 
-                return Json(new
-                { 
-                    test = a
-                });
+            return Json(new
+            {
+                test = a
+            });
         }
 
 
@@ -363,7 +362,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             if (ViewBag.loggedin) ViewBag.accountName = User.Identity.Name;
             return View();
         }
-        
+
         [Authorize]
         public IActionResult Account()
         {

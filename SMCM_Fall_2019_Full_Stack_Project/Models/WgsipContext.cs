@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMCM_Fall_2019_Full_Stack_Project.Models
 {
     public class WgsipContext : IdentityDbContext<IdentityUser>
-    {        
+    {
         public DbSet<PlayedGames> PlayedGames { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Game> Games { get; set; }

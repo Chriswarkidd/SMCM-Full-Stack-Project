@@ -1,6 +1,9 @@
-﻿
+﻿/*
+ * This class is where the account information is
+ * From here users view games they've added to the account, rate games, check games as played, and delete their account
+ */
 class Account extends React.Component {
-
+    //Delete Account Function
     deleteAccount(obj) {
         $.ajax({ url: "/Home/DeleteAccount" }).done(
             function (result) {
@@ -10,7 +13,7 @@ class Account extends React.Component {
                 }
             });
     }
-
+    //render delete button, save changes, and account games table
     render() {
         var modal = (<div id={"deleteModal"} className={"modal fade"}>
             <div className={"modal-dialog"}>
@@ -36,14 +39,14 @@ class Account extends React.Component {
         return (
             <div align="center">
                 <h1> My Games</h1>
-                {modal}
-                <Table />
-                <button className={"btn-delete"} data-toggle={"modal"} data-target={"#deleteModal"}> Delete Account </button>
-            </div>
+                {modal}                
+                <Table /> 
+                <button className={"btn-delete"} data-toggle={"modal"} data-target={"#deleteModal"}> Delete Account </button> 
+            </div> 
         );
     }
 }
-
+//Creates the table of added games for the account page
 class Table extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +60,7 @@ class Table extends React.Component {
         this.getAllGames(this);
     }
 
-
+    
     hasPlayed(obj, index) {
         obj.updatedGames[index][1] = !obj.updatedGames[index][1];
     }
@@ -71,7 +74,7 @@ class Table extends React.Component {
                 alert("Your changes have been saved!");
             });
     }
-
+    //changes the rating associated with a game
     changeRating(obj, gName, index) {
         $rating = $("#Rating"+index)
         jQuery.ajaxSettings.traditional = true;
@@ -91,18 +94,19 @@ class Table extends React.Component {
                 }
             });
     }
-
+    //gets the entire list of games from the database
     getAllGames(obj) {
         $.ajax({ url: "/Home/TestAllGames" }).done(
             function (result) {
                 obj.setState({ listOfGames: result.test });
             });
     }
-
+    //adds new game to the database
     addNewGameForm(obj) {
         obj.setState({ addGameRequest: !obj.state.addGameRequest });
     }
 
+    //Render table
     render() {
 
         var modal = (<div id={"addModal"} className={"modal fade"}>
@@ -182,7 +186,7 @@ class Table extends React.Component {
                 </div>
             </div>
         </div>);
-
+        //populate the table
         return (
             <div>
                 {modal}
@@ -214,6 +218,7 @@ class Table extends React.Component {
                                     }
                                 </td>
                                 <td>
+
                                     {
                                         g.playedGame ?
                                             (<div >
@@ -229,7 +234,7 @@ class Table extends React.Component {
                                             (<div>
                                                 N/A
                                         </div>)
-
+                                    
                                     }
                                 </td>
                             </tr>))}
@@ -238,7 +243,7 @@ class Table extends React.Component {
                 <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"} onClick={() => this.saveChanges(this)}> Save Changes </button> </div>
             </div>
         );
-    }
-}
+    }//end render
+}//end class Table
 
 ReactDOM.render(<Account/>, document.getElementById('content'));
