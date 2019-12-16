@@ -161,16 +161,23 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         {
             try
             {
+                
                 using (var db = new WgsipContext())
                 {
                     foreach (var gameA in gameList)
                     {
                         var game = gameA[0].Split(',');
-                        db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
+                        Int16 rate = 3;
+                        var query = db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
                         .First(pg =>
                         pg.Game.GameName.ToLower().Equals(game[0].ToLower())
                         && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
-                        ).PlayedGame = game[1] == "true" ? true : false;
+                        );
+
+                        query.PlayedGame = game[1] == "true" ? true : false;
+
+                        // when a game is marked as played, set the rating to 3 as a default
+                        query.Rating = rate;
                     }
 
                     db.SaveChanges();
@@ -192,13 +199,74 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             {
                 using (var db = new WgsipContext())
                 {
+                    int weight= 0;
+                    switch (rating)
+                    {
+                        case 1:
+                            weight = -2;
+                            break;
+                        case 2:
+                            weight = -1;
+                            break;
+                        case 3:
+                            weight = 0;
+                            break;
+                        case 4:
+                            weight = 1;
+                            break;
+                        case 5:
+                            weight = 2;
+                            break;
+                    }
+
+                    //get gameid
+                    int gameid = db.Games.Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().GameId;
+                    //get publisherid
+                    int publisherid = db.Games.Include(g => g.Publisher).Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().Publisher.PublisherId;
+                    //get genreid 
+                    int genreid = db.Games.Include(g => g.Genre).Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().Genre.GenreId;
+                    
+                    // create list of tags assosiated with this game
+                    List<GameTag> tagsForGame = db.GameTags.Include(g => g.Game)
+                        .Where(g => g.Game.GameId == gameid ).ToList();
+
                     db.PlayedGames.Include(pg => pg.User).Include(pg => pg.Game)
                     .First(pg =>
                     pg.Game.GameName.ToLower().Equals(gameName.ToLower())
                     && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
                     ).Rating = rating;
 
+                    // adjust weight of the publisher
+                    db.PublisherWeights.Include(pg => pg.User).Include(pg => pg.Publisher)
+                    .First(pg =>
+                    pg.Publisher.PublisherId == publisherid
+                    && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
+                    ).Weight += weight;
+
+                    //adjust weight for the genre
+                    db.GenreWeights.Include(pg => pg.User).Include(pg => pg.Genre)
+                    .First(pg =>
+                    pg.Genre.GenreId == genreid
+                    && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
+                    ).Weight += weight;
+
+                    /*tag weight is assigned for each tag a game has the tag weight is assigned 
+                    the weight dived by the number of tagsa game has*/
+                    foreach (GameTag tag in tagsForGame)
+                    {
+                        //get the tagid
+                        int tagid = tag.Tag.TagId;
+                       
+                        //adjust weight for each tag
+                        db.TagWeights.Include(pg => pg.User).Include(pg => pg.Tag)
+                        .First(pg =>
+                        pg.Tag.TagId == tagid
+                        && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
+                        ).Weight += (weight/ tagsForGame.Count);
+                    }
+
                     db.SaveChanges();
+
                 }
                 return Json(new { message = "success" });
             }
