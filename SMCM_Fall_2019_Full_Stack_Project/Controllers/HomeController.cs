@@ -95,6 +95,41 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         }
 
+        public IActionResult AddGame(String gName, String publisher, String genre, String rating, String platforms, DateTime year)
+        {
+            try
+            {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Game newGame = new Game();
+                    Genre newGenre = new Genre();
+                    newGame.EsrbRating = rating;
+                    Publisher newPublisher = new Publisher();
+
+                    newGenre.GenreName = genre;
+                    newGame.Genre = newGenre;
+
+                    newPublisher.PublisherName = publisher;
+                    newGame.Publisher = newPublisher;
+
+                    newGame.GameName = gName;
+
+                    newGame.Platforms = platforms;
+                    newGame.DatePublished = year;
+
+                    db.Add(newGame);
+
+                    db.SaveChanges();
+                }
+                return Json(new { message = "success" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+            
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult HasPlayed(String[][] gameList)
