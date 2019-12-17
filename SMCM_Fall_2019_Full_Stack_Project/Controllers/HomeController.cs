@@ -500,7 +500,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                         //if the stack is empty after taking from the top, remove the now empty stack from session storage.
                         if (gamesStack.Any())
                         {
-                            HttpContext.Session.SetString(list_key, JsonConvert.SerializeObject(gamesStack));
+                            HttpContext.Session.SetString(list_key, JsonConvert.SerializeObject(gamesStack.Reverse()));
                         }
                         else
                         {
