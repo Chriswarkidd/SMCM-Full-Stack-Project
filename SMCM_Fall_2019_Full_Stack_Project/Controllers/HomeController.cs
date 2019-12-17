@@ -187,10 +187,48 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         }
 
-        public IActionResult AddGame(String gName, String publisher, String genre, String rating, String platforms, DateTime year)
+        [Authorize]
+        public IActionResult AddGameToPlayed(String gameName)
         {
             try
             {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Game newGame = db.Games.Include(g => g.Publisher).Include(g => g.Genre).First(g => g.GameName.ToLower().Equals(gameName.ToLower()));
+                    PlayedGames playedGame = new PlayedGames();
+                    playedGame.Game = newGame;
+                    playedGame.PlayedGame = false;
+                    playedGame.User = db.Accounts.First(a => a.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower()));
+                    db.PlayedGames.Add(playedGame);
+                    db.SaveChanges();
+                }
+                return Json(new { message = "successfully added game to played games list" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+
+        }
+
+        /// <summary>
+        /// AddGame adds a new game to the database.
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <param name="publisher"></param>
+        /// <param name="genre"></param>
+        /// <param name="rating"></param>
+        /// <param name="platforms"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        /// 
+        [Authorize]
+        public IActionResult AddGame(String gameName, String publisher, String genre, String rating, String platforms, string year)
+        {
+            try
+            {
+                DateTime Date = new DateTime(int.Parse(year), 1, 1);
                 using (WgsipContext db = new WgsipContext())
                 {
                     Game newGame = new Game();
@@ -209,10 +247,15 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                     }
                     newGame.Genre = newGenre;
                     newGame.Publisher = newPublisher;
-                    newGame.GameName = gName;
+                    newGame.GameName = gameName;
                     newGame.Platforms = platforms;
-                    newGame.DatePublished = year;
+                    newGame.DatePublished = Date;
                     db.Games.Add(newGame);
+                    PlayedGames playedGame = new PlayedGames();
+                    playedGame.Game = newGame;
+                    playedGame.PlayedGame = false;
+                    playedGame.User = db.Accounts.First(a => a.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower()));
+                    db.PlayedGames.Add(playedGame);
                     db.SaveChanges();
                 }
                 return Json(new { message = "successfully added game to the Games database" });

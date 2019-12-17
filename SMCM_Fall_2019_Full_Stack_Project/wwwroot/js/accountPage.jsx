@@ -107,17 +107,33 @@ class Table extends React.Component {
         obj.setState({ addGameRequest: false });
     }
 
+    addGame(obj) {
+        let $gameName = $("#GameList");
+        $.ajax({url: "/Home/AddGameToPlayed", data: {
+                gameName: $gameName.val()
+            }
+        }).done(
+            function (result) {
+                alert(result.message);
+            }
+        )
+    }
+
     addNewGame(obj) {
-        var $gameName = $("#gameName");
-        var $gameYear = $("#gameYear");
-        var $publisher = $("#publisher");
-        var $gameRating = $("#gameRating");
-        var $genre = $("#genre");
+        let $gameName = $("#gameName");
+        let $gameYear = $("#gameYear");
+        let $publisher = $("#publisher");
+        let $gameRating = $("#gameRating");
+        let $genre = $("#genre");
+        let $platforms = $("#PlatformCheck");
         $.ajax({
             type: "POST", url: "/Home/AddGame", data: {
                 gameName: $gameName.val(), publisher: $publisher.val(), genre: $genre.val(),
-                gameRating: $gameRating.val(), gameYear: $gameYear.val()}
+                rating: $gameRating.val(), year: $gameYear.val(), platforms: $platforms.val()}
         }).done(
+            function (result) {
+                alert(result.message);
+            }
         )
     }
 
@@ -179,10 +195,8 @@ class Table extends React.Component {
                                     </div>
                                     <div className={"formGroup"}>
                                         <form>
-                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>PC</label>
-                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>Switch</label>
-                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>Playstation</label>
-                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>XBOX</label>
+                                            <label for={"PlatformCheck"}>Publishing Year:</label>
+                                            <input id={"PlatformCheck"} className={"form-control"} type={"text"} placeholder={"Platforms"}></input>
                                         </form>
                                     </div>
                                     </div>
@@ -207,7 +221,8 @@ class Table extends React.Component {
                             </div>)}
                     </div>
                     <div className={"modal-footer"}>
-                        <button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGame(this)}>Add</button>
+                        {this.state.addGameRequest ? (<button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGame(this)}>Add</button>) :
+                            (<button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addGame(this)}>Add</button>)}
                         <button className={"btn-accept"} data-dismiss="modal">Close</button>
                     </div>
                 </div>
