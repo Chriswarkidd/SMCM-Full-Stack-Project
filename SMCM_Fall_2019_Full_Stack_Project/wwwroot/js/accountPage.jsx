@@ -70,8 +70,8 @@ class Table extends React.Component {
         var $genre = $("#genre");
         $.ajax({
             type: "POST", url: "/Home/AddGame", data: {
-                gameName: $gameName.val(), gameYear: $gameYear.val(), publisher: $publisher.val(),
-                gameRating : $gameRating.val(), genre: $genre.val()}
+                gameName: $gameName.val(), publisher: $publisher.val(), genre: $genre.val(),
+                gameRating: $gameRating.val(), gameYear: $gameYear.val()}
         }).done(
         )
     }
@@ -108,32 +108,39 @@ class Table extends React.Component {
                                         </form>
                                     </div>
                                     <div className={"formGroup"}>
-                                        <form>
-                                            <label for={"gameRating"}>Age Rating:</label>
-                                            <select id={"gameRating"}>
-                                                <option selected>Select a Rating</option>
-                                                <option value={"E"}>E</option>
-                                                <option value={"E10"}>E10</option>
-                                                <option value={"E10+"}>E10+</option>
-                                                <option value={"T"}>T</option>
-                                                <option value={"M"}>M</option>
-                                            </select>
-                                        </form>
+                                                <form>
+                                                    <label for={"gameRating"}>Age Rating:</label>
+                                                    <select id={"gameRating"}>
+                                                        <option selected>Select a Rating</option>
+                                                        <option value={"E"}>E</option>
+                                                        <option value={"E10+"}>E10+</option>
+                                                        <option value={"T"}>T</option>
+                                                        <option value={"M"}>M</option>
+                                                    </select>
+                                                </form>
+                                    </div>
+                                            <div className={"formGroup"}>
+                                                <form>
+                                                    <label for={"genre"}>Genre:</label>
+                                                    <select id={"genre"}>
+                                                        <option selected>Select a Genre</option>
+                                                        <option value={"Adventure"}>Adventure</option>
+                                                        <option value={"Puzzle"}>Puzzle</option>
+                                                        <option value={"Action"}>Action</option>
+                                                        <option value={"Simulation"}>Simuation</option>
+                                                        <option value={"Sports"}>Sports</option>
+                                                    </select>
+                                                </form>
                                     </div>
                                     <div className={"formGroup"}>
                                         <form>
-                                            <label for={"genre"}>Genre:</label>
-                                            <select id={"genre"}>
-                                                <option selected>Select a Genre</option>
-                                                <option value={"Adventure"}>Adventure</option>
-                                                <option value={"Puzzle"}>Puzzle</option>
-                                                <option value={"Action"}>Action</option>
-                                                <option value={"Simulation"}>Simuation</option>
-                                                <option value={"Sports"}>Sports</option>
-                                            </select>
+                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>PC</label>
+                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>Switch</label>
+                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>Playstation</label>
+                                            <label class={"checkbox-inline"}><input type={"checkbox"} value={""}></input>XBOX</label>
                                         </form>
                                     </div>
-                                </div>
+                                    </div>
                             </div>) :
                             (<div>
                                 <div class={"row"}>

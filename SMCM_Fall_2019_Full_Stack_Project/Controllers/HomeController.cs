@@ -102,23 +102,25 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 using (WgsipContext db = new WgsipContext())
                 {
                     Game newGame = new Game();
-                    Genre newGenre = new Genre();
+                    Genre newGenre = db.Genres.First(g => g.GenreName.ToLower().Equals(genre.ToLower()));
                     newGame.EsrbRating = rating;
-                    Publisher newPublisher = new Publisher();
-
-                    newGenre.GenreName = genre;
+                    Publisher newPublisher;
+                    try
+                    {
+                        newPublisher = db.Publishers.First(p => p.PublisherName.ToLower().Equals(publisher.ToLower()));
+                    }
+                    catch (Exception)
+                    {
+                        newPublisher = new Publisher();
+                        newPublisher.PublisherName = publisher;
+                        db.Publishers.Add(newPublisher);
+                    }
                     newGame.Genre = newGenre;
-
-                    newPublisher.PublisherName = publisher;
                     newGame.Publisher = newPublisher;
-
                     newGame.GameName = gName;
-
                     newGame.Platforms = platforms;
                     newGame.DatePublished = year;
-
                     db.Games.Add(newGame);
-
                     db.SaveChanges();
                 }
                 return Json(new { message = "successfully added game to the Games database" });
@@ -127,7 +129,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             {
                 return Json(new { message = e.Message });
             }
-            
+
+
         }
 
         [HttpGet]
