@@ -62,6 +62,20 @@ class Table extends React.Component {
         obj.setState({ addGameRequest: !obj.state.addGameRequest });
     }
 
+    addNewGame(obj) {
+        var $gameName = $("#gameName");
+        var $gameYear = $("#gameYear");
+        var $publisher = $("#publisher");
+        var $gameRating = $("#gameRating");
+        var $genre = $("#genre");
+        $.ajax({
+            type: "POST", url: "/Home/AddGame", data: {
+                gameName: $gameName.val(), gameYear: $gameYear.val(), publisher: $publisher.val(),
+                gameRating : $gameRating.val(), genre: $genre.val()}
+        }).done(
+        )
+    }
+
     render() {
 
         var modal = (<div id={"addModal"} className={"modal fade"}>
@@ -83,14 +97,20 @@ class Table extends React.Component {
                                     </form>
                                     <div className={"formGroup"}>
                                         <form>
+                                            <label for={"publisher"}>Publisher:</label>
+                                            <input id={"publisher"} className={"form-control"} type={"text"} placeholder={"Publisher Name"}></input>
+                                        </form>
+                                    </div>
+                                    <div className={"formGroup"}>
+                                        <form>
                                             <label for={"gameYear"}>Publishing Year:</label>
                                             <input id={"gameYear"} className={"form-control"} type={"text"} placeholder={"Publishing Year"}></input>
                                         </form>
                                     </div>
                                     <div className={"formGroup"}>
                                         <form>
-                                            <label for={"esrbRating"}>Age Rating:</label>
-                                            <select name={"esrbRating"}>
+                                            <label for={"gameRating"}>Age Rating:</label>
+                                            <select id={"gameRating"}>
                                                 <option selected>Select a Rating</option>
                                                 <option value={"E"}>E</option>
                                                 <option value={"E10"}>E10</option>
@@ -103,7 +123,7 @@ class Table extends React.Component {
                                     <div className={"formGroup"}>
                                         <form>
                                             <label for={"genre"}>Genre:</label>
-                                            <select name={"genre"}>
+                                            <select id={"genre"}>
                                                 <option selected>Select a Genre</option>
                                                 <option value={"Adventure"}>Adventure</option>
                                                 <option value={"Puzzle"}>Puzzle</option>
@@ -135,7 +155,7 @@ class Table extends React.Component {
                                 </div>)}
                     </div>
                     <div className={"modal-footer"}>
-                        <button className={"btn-accept"} data-dismiss="modal">Add</button>
+                        <button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGame(this)}>Add</button>
                         <button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGameForm(this)}>Close</button>
                     </div>
                 </div>

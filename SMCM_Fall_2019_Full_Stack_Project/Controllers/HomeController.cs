@@ -117,11 +117,11 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                     newGame.Platforms = platforms;
                     newGame.DatePublished = year;
 
-                    db.Add(newGame);
+                    db.Games.Add(newGame);
 
                     db.SaveChanges();
                 }
-                return Json(new { message = "success" });
+                return Json(new { message = "successfully added game to the Games database" });
             }
             catch (Exception e)
             {
