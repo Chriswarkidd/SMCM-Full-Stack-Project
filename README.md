@@ -1,12 +1,12 @@
 # SMCM-Full-Stack-Project
 
-Christopher Brown
+Destiny Adams
 
-Zoe Lambert
+Christopher Brown
 
 Alexander Kline
 
-Destiny Adams
+Zoe Lambert
 
 12/17/2019
 
