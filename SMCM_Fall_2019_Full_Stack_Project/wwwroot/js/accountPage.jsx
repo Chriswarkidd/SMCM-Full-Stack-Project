@@ -198,7 +198,7 @@ class Table extends React.Component {
                                     </div>
                                     <div className={"formGroup"}>
                                         <form>
-                                            <label for={"PlatformCheck"}>Publishing Year:</label>
+                                            <label for={"PlatformCheck"}>Platforms:</label>
                                             <input id={"PlatformCheck"} className={"form-control"} type={"text"} placeholder={"Platforms"}></input>
                                         </form>
                                     </div>
