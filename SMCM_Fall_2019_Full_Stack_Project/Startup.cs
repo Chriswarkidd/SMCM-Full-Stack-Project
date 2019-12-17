@@ -40,7 +40,9 @@ namespace SMCM_Fall_2019_Full_Stack_Project
 
             services.AddControllersWithViews();
 
+            services.AddDistributedMemoryCache();
 
+            services.AddSession();
             //Use this when working with a local database
 
             services.AddDbContext<WgsipContext>(options =>
@@ -71,6 +73,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
+
+            app.UseSession();
 
             app.UseReact(config => { });
 

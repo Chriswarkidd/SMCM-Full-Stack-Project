@@ -218,7 +218,7 @@ class Table extends React.Component {
                                         g.playedGame ?
                                             (<div >
                                             <select id={"Rating" + index} className={"select-accountpage"}
-                                                name={"Rating"} defaultValue={g.rating ? g.rating : "3"} onClick={() => this.changeRating(this, g.gameName, index)}>
+                                                name={"Rating"} defaultValue={g.rating ? g.rating : "3"} onChange={() => this.changeRating(this, g.gameName, index)}>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
