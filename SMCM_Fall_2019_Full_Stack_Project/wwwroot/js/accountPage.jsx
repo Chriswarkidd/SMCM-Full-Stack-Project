@@ -39,10 +39,10 @@ class Account extends React.Component {
         return (
             <div align="center">
                 <h1> My Games</h1>
-                {modal}                
-                <Table /> 
-                <button className={"btn-delete"} data-toggle={"modal"} data-target={"#deleteModal"}> Delete Account </button> 
-            </div> 
+                {modal}
+                <Table />
+                <button className={"btn-delete"} data-toggle={"modal"} data-target={"#deleteModal"}> Delete Account </button>
+            </div>
         );
     }
 }
@@ -53,14 +53,14 @@ class Table extends React.Component {
         this.state = {
             games: [],
             listOfGames: [],
-            addGameRequest : false
+            addGameRequest: false
         };
         this.updatedGames = [];
         this.ajaxTest(this);
         this.getAllGames(this);
     }
 
-    
+
     hasPlayed(obj, index) {
         obj.updatedGames[index][1] = !obj.updatedGames[index][1];
     }
@@ -76,11 +76,11 @@ class Table extends React.Component {
     }
     //changes the rating associated with a game
     changeRating(obj, gName, index) {
-        $rating = $("#Rating"+index)
+        $rating = $("#Rating" + index)
         jQuery.ajaxSettings.traditional = true;
         $.ajax({ url: "/Home/Rate", data: { gameName: gName, rating: $rating.val() } }).done(
             function (result) {
-                
+
             });
     }
 
@@ -103,7 +103,11 @@ class Table extends React.Component {
     }
     //adds new game to the database
     addNewGameForm(obj) {
-        obj.setState({ addGameRequest: !obj.state.addGameRequest });
+        obj.setState({ addGameRequest: true });
+    }
+
+    resetNewGameForm(obj) {
+        obj.setState({ addGameRequest: false });
     }
 
     //Render table
@@ -115,14 +119,14 @@ class Table extends React.Component {
                     <div className={"modal-header"}>
                         <h4>Add a Game!</h4>
                         <button className={"close"} data-dismiss="modal">
-                            <span className={"fas fa-times"}/>
+                            <span className={"fas fa-times"} />
                         </button>
                     </div>
                     <div className={"modal-body"}>
                         {this.state.addGameRequest ?
                             (<div className={"container"}>
                                 <div className={"formGroup"}>
-                                <form>
+                                    <form>
                                         <label for={"gameName"}>Name:</label>
                                         <input id={"gameName"} className={"form-control"} type={"text"} placeholder={"Game Name"}></input>
                                     </form>
@@ -162,26 +166,26 @@ class Table extends React.Component {
                             </div>) :
                             (<div>
                                 <div className={"row"}>
-                                <div className={"col-sm-12"}>
-                                    <label htmlFor={"GameList"}>Game: </label>
-                                    <select id={"GameList"} defaultValue={""}>
-                                        <option value="">Select an existing game</option>
-                                        {
-                                            this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
-                                        }
-                                    </select>
+                                    <div className={"col-sm-12"}>
+                                        <label htmlFor={"GameList"}>Game: </label>
+                                        <select id={"GameList"} defaultValue={""}>
+                                            <option value="">Select an existing game</option>
+                                            {
+                                                this.state.listOfGames && this.state.listOfGames.map((g, index) => (<option key={index} value={g.gameName}>{g.gameName}</option>))
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
                                 <div className={"row"}>
-                                <div className={"col-sm-12"}>
-                                    <button className={"btn btn-link"} role={"link"} onClick={() => this.addNewGameForm(this)}>Can't Find Your Game?</button>
+                                    <div className={"col-sm-12"}>
+                                        <button className={"btn btn-link"} role={"link"} onClick={() => this.addNewGameForm(this)}>Can't Find Your Game?</button>
+                                    </div>
                                 </div>
-                                </div>
-                                </div>)}
+                            </div>)}
                     </div>
                     <div className={"modal-footer"}>
                         <button className={"btn-accept"} data-dismiss="modal">Add</button>
-                        <button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGameForm(this)}>Close</button>
+                        <button className={"btn-accept"} data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -190,7 +194,7 @@ class Table extends React.Component {
         return (
             <div>
                 {modal}
-                <button className={"btn-primary"} data-toggle={"modal"} data-target={"#addModal"}>Add a game!</button>
+                <button className={"btn-primary"} data-toggle={"modal"} data-target={"#addModal"} onClick={() => this.resetNewGameForm(this)}>Add a game!</button>
                 <table className={"table table-striped"}>
                     <thead>
                         <tr>
@@ -207,37 +211,36 @@ class Table extends React.Component {
                     </thead>
                     <tbody>
                         {this.state.games && this.state.games.map((g, index) => (<tr key={index}>
-                                <td>
-                                    {g.gameName}
-                                </td>
-                                <td>
-                                    {
-                                        g.playedGame ?
-                                            (<input type="checkbox" checked={g.playedGame} readOnly={true} />) :
-                                            (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, index)} />)
-                                    }
-                                </td>
-                                <td>
-
-                                    {
-                                        g.playedGame ?
-                                            (<div >
+                            <td>
+                                {g.gameName}
+                            </td>
+                            <td>
+                                {
+                                    g.playedGame ?
+                                        (<input type="checkbox" checked={g.playedGame} readOnly={true} />) :
+                                        (<input type="checkbox" defaultChecked={g.playedGame} onClick={() => this.hasPlayed(this, index)} />)
+                                }
+                            </td>
+                            <td>
+                                {
+                                    g.playedGame ?
+                                        (<div >
                                             <select id={"Rating" + index} className={"select-accountpage"}
-                                                name={"Rating"} defaultValue={g.rating ? g.rating : "3"} onClick={() => this.changeRating(this, g.gameName, index)}>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>) :
-                                            (<div>
-                                                N/A
+                                                name={"Rating"} defaultValue={g.rating ? g.rating : "3"} onChange={() => this.changeRating(this, g.gameName, index)}>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>) :
+                                        (<div>
+                                            N/A
                                         </div>)
-                                    
-                                    }
-                                </td>
-                            </tr>))}
+
+                                }
+                            </td>
+                        </tr>))}
                     </tbody>
                 </table>
                 <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"} onClick={() => this.saveChanges(this)}> Save Changes </button> </div>
@@ -246,4 +249,4 @@ class Table extends React.Component {
     }//end render
 }//end class Table
 
-ReactDOM.render(<Account/>, document.getElementById('content'));
+ReactDOM.render(<Account />, document.getElementById('content'));
