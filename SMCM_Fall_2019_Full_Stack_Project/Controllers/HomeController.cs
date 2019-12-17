@@ -187,6 +187,87 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         }
 
+        [Authorize]
+        public IActionResult AddGameToPlayed(String gameName)
+        {
+            try
+            {
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Game newGame = db.Games.Include(g => g.Publisher).Include(g => g.Genre).First(g => g.GameName.ToLower().Equals(gameName.ToLower()));
+                    PlayedGames playedGame = new PlayedGames();
+                    playedGame.Game = newGame;
+                    playedGame.PlayedGame = false;
+                    playedGame.User = db.Accounts.First(a => a.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower()));
+                    db.PlayedGames.Add(playedGame);
+                    db.SaveChanges();
+                }
+                return Json(new { message = "successfully added game to played games list" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+
+        }
+
+        /// <summary>
+        /// AddGame adds a new game to the database.
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <param name="publisher"></param>
+        /// <param name="genre"></param>
+        /// <param name="rating"></param>
+        /// <param name="platforms"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        /// 
+        [Authorize]
+        public IActionResult AddGame(String gameName, String publisher, String genre, String rating, String platforms, string year)
+        {
+            try
+            {
+                DateTime Date = new DateTime(int.Parse(year), 1, 1);
+                using (WgsipContext db = new WgsipContext())
+                {
+                    Game newGame = new Game();
+                    Genre newGenre = db.Genres.First(g => g.GenreName.ToLower().Equals(genre.ToLower()));
+                    newGame.EsrbRating = rating;
+                    Publisher newPublisher;
+                    try
+                    {
+                        newPublisher = db.Publishers.First(p => p.PublisherName.ToLower().Equals(publisher.ToLower()));
+                    }
+                    catch (Exception)
+                    {
+                        newPublisher = new Publisher();
+                        newPublisher.PublisherName = publisher;
+                        db.Publishers.Add(newPublisher);
+                    }
+                    newGame.Genre = newGenre;
+                    newGame.Publisher = newPublisher;
+                    newGame.GameName = gameName;
+                    newGame.Platforms = platforms;
+                    newGame.DatePublished = Date;
+                    db.Games.Add(newGame);
+                    PlayedGames playedGame = new PlayedGames();
+                    playedGame.Game = newGame;
+                    playedGame.PlayedGame = false;
+                    playedGame.User = db.Accounts.First(a => a.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower()));
+                    db.PlayedGames.Add(playedGame);
+                    db.SaveChanges();
+                }
+                return Json(new { message = "successfully added game to the Games database" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message });
+            }
+
+
+        }
+
         /// <summary>
         /// Takes in an array from the front end of the games that have or 
         /// have not been played. If the game is set to played, it updates it in the database and
@@ -194,6 +275,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         /// </summary>
         /// <param name="gameList"></param>
         /// <returns></returns>
+
         [HttpGet]
         [Authorize]
         public IActionResult HasPlayed(String[][] gameList)
