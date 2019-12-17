@@ -110,7 +110,36 @@ class Table extends React.Component {
         obj.setState({ addGameRequest: false });
     }
 
-    //Render table
+    addGame(obj) {
+        let $gameName = $("#GameList");
+        $.ajax({url: "/Home/AddGameToPlayed", data: {
+                gameName: $gameName.val()
+            }
+        }).done(
+            function (result) {
+                alert(result.message);
+            }
+        )
+    }
+
+    addNewGame(obj) {
+        let $gameName = $("#gameName");
+        let $gameYear = $("#gameYear");
+        let $publisher = $("#publisher");
+        let $gameRating = $("#gameRating");
+        let $genre = $("#genre");
+        let $platforms = $("#PlatformCheck");
+        $.ajax({
+            type: "POST", url: "/Home/AddGame", data: {
+                gameName: $gameName.val(), publisher: $publisher.val(), genre: $genre.val(),
+                rating: $gameRating.val(), year: $gameYear.val(), platforms: $platforms.val()}
+        }).done(
+            function (result) {
+                alert(result.message);
+            }
+        )
+    }
+
     render() {
 
         var modal = (<div id={"addModal"} className={"modal fade"}>
@@ -132,37 +161,48 @@ class Table extends React.Component {
                                     </form>
                                     <div className={"formGroup"}>
                                         <form>
+                                            <label for={"publisher"}>Publisher:</label>
+                                            <input id={"publisher"} className={"form-control"} type={"text"} placeholder={"Publisher Name"}></input>
+                                        </form>
+                                    </div>
+                                    <div className={"formGroup"}>
+                                        <form>
                                             <label for={"gameYear"}>Publishing Year:</label>
                                             <input id={"gameYear"} className={"form-control"} type={"text"} placeholder={"Publishing Year"}></input>
                                         </form>
                                     </div>
                                     <div className={"formGroup"}>
-                                        <form>
-                                            <label for={"esrbRating"}>Age Rating:</label>
-                                            <select name={"esrbRating"}>
-                                                <option selected>Select a Rating</option>
-                                                <option value={"E"}>E</option>
-                                                <option value={"E10"}>E10</option>
-                                                <option value={"E10+"}>E10+</option>
-                                                <option value={"T"}>T</option>
-                                                <option value={"M"}>M</option>
-                                            </select>
-                                        </form>
+                                                <form>
+                                                    <label for={"gameRating"}>Age Rating:</label>
+                                                    <select id={"gameRating"}>
+                                                        <option selected>Select a Rating</option>
+                                                        <option value={"E"}>E</option>
+                                                        <option value={"E10+"}>E10+</option>
+                                                        <option value={"T"}>T</option>
+                                                        <option value={"M"}>M</option>
+                                                    </select>
+                                                </form>
+                                    </div>
+                                            <div className={"formGroup"}>
+                                                <form>
+                                                    <label for={"genre"}>Genre:</label>
+                                                    <select id={"genre"}>
+                                                        <option selected>Select a Genre</option>
+                                                        <option value={"Adventure"}>Adventure</option>
+                                                        <option value={"Puzzle"}>Puzzle</option>
+                                                        <option value={"Action"}>Action</option>
+                                                        <option value={"Simulation"}>Simuation</option>
+                                                        <option value={"Sports"}>Sports</option>
+                                                    </select>
+                                                </form>
                                     </div>
                                     <div className={"formGroup"}>
                                         <form>
-                                            <label for={"genre"}>Genre:</label>
-                                            <select name={"genre"}>
-                                                <option selected>Select a Genre</option>
-                                                <option value={"Adventure"}>Adventure</option>
-                                                <option value={"Puzzle"}>Puzzle</option>
-                                                <option value={"FPS"}>FPS</option>
-                                                <option value={"RPG"}>RPG</option>
-                                                <option value={"Horror"}>Horror</option>
-                                            </select>
+                                            <label for={"PlatformCheck"}>Publishing Year:</label>
+                                            <input id={"PlatformCheck"} className={"form-control"} type={"text"} placeholder={"Platforms"}></input>
                                         </form>
                                     </div>
-                                </div>
+                                    </div>
                             </div>) :
                             (<div>
                                 <div className={"row"}>
@@ -184,7 +224,8 @@ class Table extends React.Component {
                             </div>)}
                     </div>
                     <div className={"modal-footer"}>
-                        <button className={"btn-accept"} data-dismiss="modal">Add</button>
+                        {this.state.addGameRequest ? (<button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addNewGame(this)}>Add</button>) :
+                            (<button className={"btn-accept"} data-dismiss="modal" onClick={() => this.addGame(this)}>Add</button>)}
                         <button className={"btn-accept"} data-dismiss="modal">Close</button>
                     </div>
                 </div>

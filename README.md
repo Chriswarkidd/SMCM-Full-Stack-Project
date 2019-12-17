@@ -7,9 +7,8 @@ Christopher Brown
 
 Alexander Kline
 
-Zoe Lambert
+Destiny Adams
 
-Description: We have made a video game recommender website. It stores the games you save to your account. Once they are saved you can mark them as played. 
-After they are marked as played, they can be rated on a scale of 1-5. This website has two algorithms. One to recommend a game randomly when no one is logged in. 
-The other is a smart recommender that considers the games you've rated before and weighs the tags associated with that game and ranks games based on those tags. 
-Users have the option to add games into our database to help populate it.
+12/17/2019
+
+Description: We created a Video Game recommender webapp. This webapp allows users to generate a single game recommendation, either based off of specific filters or by creating an account and using our customized recommendation system. Creating an account allows users to input any games that they have already played, along with a rating. The webapp will generate a result using our AI recommendation system according to the type of game and rating the user has provided. Without an account, users can simply select filters and generate a pseudo-random result.
