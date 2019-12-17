@@ -17,10 +17,12 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         public DbSet<Game> Games { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
-
         public DbSet<Tag> Tags { get; set; }
-
         public DbSet<TagWeights> TagWeights { get; set; }
+        public DbSet<GameTag> GameTags { get; set; }
+        public DbSet<PublisherWeights> PublisherWeights { get; set; }
+        public DbSet<GenreWeights> GenreWeights { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
