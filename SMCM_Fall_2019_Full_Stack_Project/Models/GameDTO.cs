@@ -34,6 +34,17 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
             Score = 0;
         }
 
+
+        /// <summary>
+        /// This is the constructor to be used by the JsonConvert method to retrieve the Stack of GameDTOs from session storage
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="genre"></param>
+        /// <param name="publisher"></param>
+        /// <param name="esrbRating"></param>
+        /// <param name="platforms"></param>
+        /// <param name="score"></param>
         [JsonConstructor]
         public GameDTO(string gameName, DateTime dateTime, string genre, string publisher, string esrbRating, string platforms, int score)
         {

@@ -35,7 +35,15 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             _signInManager = signInManager;
         }
 
-
+        /// <summary>
+        /// Takes in a username and password from the front end, and
+        /// attempts to create a new account for the user. 
+        /// If the username is already taken it informs the user that an account already exists 
+        /// with that email.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         #region api
         [HttpPost]
         public async Task<IActionResult> CreateAccount(String username, String password)
@@ -63,6 +71,11 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             return Json(new { a = result.Errors.ToArray() });
         }
 
+        /// <summary>
+        /// This method takes in the name of the game that was most recently suggested and adds it to the user's game list.
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SoundsGood(String game)
         {
@@ -100,7 +113,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
 
         }
-
+        /// <summary>
+        /// This method deletes the user's account from the database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> DeleteAccountAsync()
@@ -127,6 +143,12 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         }
 
+        /// <summary>
+        /// This method takes in a search term from the front end and returns the list of games
+        /// that have that search term located in one of their attributes.
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SearchGames(string searchTerm)
         {
@@ -165,6 +187,13 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         }
 
+        /// <summary>
+        /// Takes in an array from the front end of the games that have or 
+        /// have not been played. If the game is set to played, it updates it in the database and
+        /// sets its rating to the default which is 3.
+        /// </summary>
+        /// <param name="gameList"></param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public IActionResult HasPlayed(String[][] gameList)
@@ -202,6 +231,14 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
         }
 
+        /// <summary>
+        /// This method takes in the name of the game being rated and the rating from the front end
+        /// and updates the rating for that game for that user and updates the weights of the publisher and genre of the 
+        /// game for that user. It also updates the weights of any tags associated with the game.
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <param name="rating"></param>
+        /// <returns>A message indicating if it was successful or not</returns>
         [HttpGet]
         [Authorize]
         public IActionResult Rate(String gameName, Int16 rating)
@@ -347,6 +384,13 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
         }
 
+        /// <summary>
+        /// This method takes in a username and password from the front end and sees if 
+        /// the combination matches an account's username and password combination.
+        /// </summary>
+        /// <param name="username"> a user name from the front end to sign in.</param>
+        /// <param name="password"> the password the user has entered.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> LogIn(String username, String password)
         {
@@ -366,6 +410,16 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             return Json(new { a = result.IsLockedOut ? "This account is currently locked out" : "Either the Email or Password provided was incorrect." });
         }
 
+
+        /// <summary>
+        /// This method--still named test from the beginning of the creation of the website--takes
+        /// in the filters from the front end and returns a game to play. It will return a random game 
+        /// if the user is not logged in, or if the user has only rated games neutrally.
+        /// </summary>
+        /// <param name="genre"></param>
+        /// <param name="rating"></param>
+        /// <param name="platform"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Test(String genre = null, String rating = null, String platform = null)
         {
@@ -373,16 +427,19 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             genre = genre ?? "";
             rating = rating ?? "";
             platform = platform ?? "";
+            //if the filters have changed, we need to make a new list
             if (!genre.Equals(HttpContext.Session.GetString(genre_key))
                 || !rating.Equals(HttpContext.Session.GetString(rating_key))
                 || !platform.Equals(HttpContext.Session.GetString(platform_key)))
             {
                 HttpContext.Session.Remove(list_key);
             }
+            //attempt retrieve the list from session storage.
             string list = HttpContext.Session.GetString(list_key);
             using (var db = new WgsipContext())
             {
                 var gameList = db.Games.Include(g => g.Genre).Include(g => g.Publisher).ToList();
+                //see if the user is logged in.
                 if (User.Identity.IsAuthenticated)
                 {
                     List<PlayedGames> userGames = db.PlayedGames.Include(g => g.User).Include(g => g.Game)
@@ -406,6 +463,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                             test = gameList[rng.Next(0, gameList.Count)].GameName
                         });
                     }
+                    //See if we already have a list generated that we can pull from, or if we have to make a new one.
                     if (list == null)
                     {
                         gameList = gameList.FindAll(
@@ -422,8 +480,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                         {
                             test = "No matching games found. 😢"
                         });
+                        //we use a stack for the pop method here.
                         gamesStack = new Stack<GameDTO>(gamesStack.OrderBy(g => g.Score));
                         a = gamesStack.Pop().GameName;
+                        //Make sure there are still games left in the list before putting it into session storage.
                         if (gamesStack.Any())
                         {
                             HttpContext.Session.SetString(list_key, JsonConvert.SerializeObject(gamesStack.Reverse()));
@@ -434,8 +494,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                     }
                     else
                     {
+                        //retrieve the stack from session storage and take the top game from it.
                         Stack<GameDTO> gamesStack = JsonConvert.DeserializeObject<Stack<GameDTO>>(list);
                         a = gamesStack.Pop().GameName;
+                        //if the stack is empty after taking from the top, remove the now empty stack from session storage.
                         if (gamesStack.Any())
                         {
                             HttpContext.Session.SetString(list_key, JsonConvert.SerializeObject(gamesStack));
@@ -448,6 +510,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                 }
                 else
                 {
+                    //if user is not logged into an account, give them a random game.
                     Random rng = new Random();
                     gameList = gameList.FindAll(
                         g => g.Genre.GenreName.ToLower().Contains(genre.ToLower())
@@ -467,7 +530,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         }
 
 
-
+        /// <summary>
+        /// This method returns a list of all of the games in the database.
+        /// </summary>
+        /// <returns>Json containing a list of all the games</returns>
         [HttpGet]
         public IActionResult TestAllGames()
         {
@@ -498,7 +564,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
         }
 
-
+        /// <summary>
+        /// This method retrieves the list of games the user as added to their account.
+        /// </summary>
+        /// <returns>The list of games the user added to their account.</returns>
         [HttpGet]
         [Authorize]
         public IActionResult TestGameList()
@@ -530,6 +599,10 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
             }
         }
 
+        /// <summary>
+        /// Old method from the start of the project.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Test2()
         {
             String game = "Divinity 2: Original Sin";
@@ -538,6 +611,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         #endregion
 
+        //This region contains all the default routing and page stuff.
         #region page direction
         public IActionResult Index()
         {
