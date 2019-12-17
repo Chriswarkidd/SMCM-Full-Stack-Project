@@ -1,9 +1,4 @@
-﻿/*
- * This class is the login page
- * It deals with logging in users and signing them up for an account if they wish
- */
-
-class Login extends React.Component {
+﻿class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,7 +7,7 @@ class Login extends React.Component {
             LogInMessage: null
         };
     }
-    //Create account function when a new user signs up
+
     createAccount(obj) {
         obj.setState({
             LogInMessage: null,
@@ -32,7 +27,7 @@ class Login extends React.Component {
                 }
             });
     }
-    //Login method for exsisting users
+
     logIn(obj) {
         obj.setState({
             LogInMessage: null,
@@ -52,7 +47,7 @@ class Login extends React.Component {
                 } 
             });
     }
-    //render the login page form
+    
     render() {
         return (
             <div>

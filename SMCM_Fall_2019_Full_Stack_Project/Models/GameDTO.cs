@@ -75,8 +75,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
         }
 
         /// <summary>
-        /// Get the score for the game based on our formula for scoring games based on
-        /// what the user likes.
+        /// Get the score for the game based on our formula for scoring games based on 
+        /// what the user likes. 
         /// </summary>
         /// <param name="game">The game to calulate the user's preference for at</param>
         /// <param name="db">The database context</param>
@@ -93,7 +93,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Models
             int gameId = game.GameId;
             //get publisherid
             int publisherId = game.Publisher.PublisherId;
-            //get genreid
+            //get genreid 
             int genreId = game.Genre.GenreId;
 
             try

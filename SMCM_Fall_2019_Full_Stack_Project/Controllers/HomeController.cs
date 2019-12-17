@@ -37,8 +37,8 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         /// <summary>
         /// Takes in a username and password from the front end, and
-        /// attempts to create a new account for the user.
-        /// If the username is already taken it informs the user that an account already exists
+        /// attempts to create a new account for the user. 
+        /// If the username is already taken it informs the user that an account already exists 
         /// with that email.
         /// </summary>
         /// <param name="username"></param>
@@ -269,7 +269,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         }
 
         /// <summary>
-        /// Takes in an array from the front end of the games that have or
+        /// Takes in an array from the front end of the games that have or 
         /// have not been played. If the game is set to played, it updates it in the database and
         /// sets its rating to the default which is 3.
         /// </summary>
@@ -315,7 +315,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         /// <summary>
         /// This method takes in the name of the game being rated and the rating from the front end
-        /// and updates the rating for that game for that user and updates the weights of the publisher and genre of the
+        /// and updates the rating for that game for that user and updates the weights of the publisher and genre of the 
         /// game for that user. It also updates the weights of any tags associated with the game.
         /// </summary>
         /// <param name="gameName"></param>
@@ -353,7 +353,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                     int gameid = db.Games.Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().GameId;
                     //get publisherid
                     int publisherid = db.Games.Include(g => g.Publisher).Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().Publisher.PublisherId;
-                    //get genreid
+                    //get genreid 
                     int genreid = db.Games.Include(g => g.Genre).Where(g => g.GameName.ToLower().Equals(gameName.ToLower())).First().Genre.GenreId;
 
                     // create list of tags assosiated with this game
@@ -426,7 +426,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                         db.GenreWeights.Add(gW);
                     }
 
-                    /*tag weight is assigned for each tag a game has the tag weight is assigned
+                    /*tag weight is assigned for each tag a game has the tag weight is assigned 
                     the weight dived by the number of tagsa game has*/
                     foreach (GameTag tag in tagsForGame)
                     {
@@ -441,7 +441,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
                             pg.Tag.TagId == tagid
                             && pg.User.AccountEmail.ToLower().Equals(User.Identity.Name.ToLower())
                             );
-                            t.Weight += (prevWeight / tagsForGame.Count) * -1; //remove the change from the previous rating.
+                            t.Weight += (prevWeight / tagsForGame.Count) * -1; //remove the change from the previous rating. 
                             t.Weight += (weight / tagsForGame.Count);
                         }
                         catch (Exception)
@@ -467,7 +467,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
         }
 
         /// <summary>
-        /// This method takes in a username and password from the front end and sees if
+        /// This method takes in a username and password from the front end and sees if 
         /// the combination matches an account's username and password combination.
         /// </summary>
         /// <param name="username"> a user name from the front end to sign in.</param>
@@ -495,7 +495,7 @@ namespace SMCM_Fall_2019_Full_Stack_Project.Controllers
 
         /// <summary>
         /// This method--still named test from the beginning of the creation of the website--takes
-        /// in the filters from the front end and returns a game to play. It will return a random game
+        /// in the filters from the front end and returns a game to play. It will return a random game 
         /// if the user is not logged in, or if the user has only rated games neutrally.
         /// </summary>
         /// <param name="genre"></param>

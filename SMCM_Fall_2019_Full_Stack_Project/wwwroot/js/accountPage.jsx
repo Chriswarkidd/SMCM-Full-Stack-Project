@@ -1,9 +1,6 @@
-﻿/*
- * This class is where the account information is
- * From here users view games they've added to the account, rate games, check games as played, and delete their account
- */
+﻿
 class Account extends React.Component {
-    //Delete Account Function
+
     deleteAccount(obj) {
         $.ajax({ url: "/Home/DeleteAccount" }).done(
             function (result) {
@@ -13,7 +10,7 @@ class Account extends React.Component {
                 }
             });
     }
-    //render delete button, save changes, and account games table
+
     render() {
         var modal = (<div id={"deleteModal"} className={"modal fade"}>
             <div className={"modal-dialog"}>
@@ -46,7 +43,7 @@ class Account extends React.Component {
         );
     }
 }
-//Creates the table of added games for the account page
+
 class Table extends React.Component {
     constructor(props) {
         super(props);
@@ -74,7 +71,7 @@ class Table extends React.Component {
                 alert("Your changes have been saved!");
             });
     }
-    //changes the rating associated with a game
+
     changeRating(obj, gName, index) {
         $rating = $("#Rating" + index)
         jQuery.ajaxSettings.traditional = true;
@@ -94,14 +91,14 @@ class Table extends React.Component {
                 }
             });
     }
-    //gets the entire list of games from the database
+
     getAllGames(obj) {
         $.ajax({ url: "/Home/TestAllGames" }).done(
             function (result) {
                 obj.setState({ listOfGames: result.test });
             });
     }
-    //adds new game to the database
+
     addNewGameForm(obj) {
         obj.setState({ addGameRequest: true });
     }
@@ -231,7 +228,7 @@ class Table extends React.Component {
                 </div>
             </div>
         </div>);
-        //populate the table
+
         return (
             <div>
                 {modal}
@@ -287,7 +284,7 @@ class Table extends React.Component {
                 <div style={{ paddingBottom: "5px" }}> <button className={"btn btn-primary"} onClick={() => this.saveChanges(this)}> Save Changes </button> </div>
             </div>
         );
-    }//end render
-}//end class Table
+    }
+}
 
 ReactDOM.render(<Account />, document.getElementById('content'));

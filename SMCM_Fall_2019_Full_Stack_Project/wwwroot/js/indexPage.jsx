@@ -1,9 +1,4 @@
-﻿/*
- * This class is the main page of the website
- * From here users can login, sign up, view their account, view our games database and get a game recommended
- */
-
-class TestReactComponent extends React.Component {
+﻿class TestReactComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,7 +7,7 @@ class TestReactComponent extends React.Component {
             recommended: false
         };
     }
-    //method for Sounds Great button click to add game to account
+
     soundGood(obj) {
         $.ajax({
             url: "/Home/SoundsGood", data: {
@@ -23,8 +18,6 @@ class TestReactComponent extends React.Component {
                  alert(result.message);
             });
     }
-
-
 
     //This isn't supposed to be how it works, but this is the way it currently has to be to work.
     //Will look into this more later.
@@ -47,7 +40,7 @@ class TestReactComponent extends React.Component {
                 }); 
             });
     }
-    //render main page
+
     render() {
         return (
             <div className={"container-fluid"}>
@@ -102,7 +95,7 @@ class TestReactComponent extends React.Component {
             </div>
 
         );
-    }//end render
-}//end class
+    }
+}
 
 ReactDOM.render(<TestReactComponent />, document.getElementById('content'));
